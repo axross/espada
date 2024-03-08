@@ -1,0 +1,22 @@
+[package]
+name = "espada"
+version = "0.1.0"
+description = "Texas Hold'em poker odds evaluator"
+categories = ["games", "mathematics", "simulation"]
+keywords = ["poker", "texas-holdem"]
+repository = "https://github.com/axross/espada"
+documentation = "https://docs.rs/espada"
+readme = "README.md"
+license-file = "LICENSE.txt"
+edition = "2021"
+
+[dependencies]
+regex = "1.10.3"
+
+[dev-dependencies]
+criterion = { version = "0.4", features = ["html_reports"] }
+num_cpus = "1.16.0"
+
+[[bench]]
+name = "small"
+harness = false
