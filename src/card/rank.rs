@@ -1,6 +1,4 @@
-use super::{Card, Suit};
 use core::fmt::{Display, Formatter};
-use core::ops::BitOr;
 use core::str::FromStr;
 
 #[derive(Debug, PartialEq, Eq, Hash, PartialOrd, Ord, Clone, Copy)]
@@ -58,76 +56,58 @@ impl Rank {
     }
 }
 
-impl BitOr<Suit> for Rank {
-    type Output = Card;
-
-    fn bitor(self, suit: Suit) -> Self::Output {
-        Card::new(self, suit)
-    }
-}
-
-#[cfg(test)]
-mod tests_bitor_with_suit {
-    use super::*;
-
-    #[test]
-    fn it_creates_card_by_bitor_with_suit() {
-        assert_eq!(Rank::Ace | Suit::Spade, Card::new(Rank::Ace, Suit::Spade));
-        assert_eq!(
-            Rank::Queen | Suit::Heart,
-            Card::new(Rank::Queen, Suit::Heart)
-        );
-        assert_eq!(
-            Rank::Eight | Suit::Diamond,
-            Card::new(Rank::Eight, Suit::Diamond)
-        );
-        assert_eq!(Rank::Deuce | Suit::Club, Card::new(Rank::Deuce, Suit::Club));
-    }
-}
-
 impl Display for Rank {
     fn fmt(&self, f: &mut Formatter) -> core::fmt::Result {
-        match self {
-            Rank::Ace => write!(f, "A"),
-            Rank::King => write!(f, "K"),
-            Rank::Queen => write!(f, "Q"),
-            Rank::Jack => write!(f, "J"),
-            Rank::Ten => write!(f, "T"),
-            Rank::Nine => write!(f, "9"),
-            Rank::Eight => write!(f, "8"),
-            Rank::Seven => write!(f, "7"),
-            Rank::Six => write!(f, "6"),
-            Rank::Five => write!(f, "5"),
-            Rank::Four => write!(f, "4"),
-            Rank::Trey => write!(f, "3"),
-            Rank::Deuce => write!(f, "2"),
+        let c: char = self.into();
+
+        c.to_string().fmt(f)
+    }
+}
+
+impl TryFrom<&char> for Rank {
+    type Error = ();
+
+    fn try_from(c: &char) -> Result<Self, Self::Error> {
+        match c {
+            'A' => Ok(Rank::Ace),
+            'K' => Ok(Rank::King),
+            'Q' => Ok(Rank::Queen),
+            'J' => Ok(Rank::Jack),
+            'T' => Ok(Rank::Ten),
+            '9' => Ok(Rank::Nine),
+            '8' => Ok(Rank::Eight),
+            '7' => Ok(Rank::Seven),
+            '6' => Ok(Rank::Six),
+            '5' => Ok(Rank::Five),
+            '4' => Ok(Rank::Four),
+            '3' => Ok(Rank::Trey),
+            '2' => Ok(Rank::Deuce),
+            _ => Err(()),
         }
     }
 }
 
-#[cfg(test)]
-mod tests_display {
-    use super::*;
+impl TryFrom<char> for Rank {
+    type Error = ();
 
-    #[test]
-    fn it_formats() {
-        assert_eq!(Rank::Ace.to_string(), "A");
-        assert_eq!(Rank::King.to_string(), "K");
-        assert_eq!(Rank::Queen.to_string(), "Q");
-        assert_eq!(Rank::Jack.to_string(), "J");
-        assert_eq!(Rank::Ten.to_string(), "T");
-        assert_eq!(Rank::Nine.to_string(), "9");
-        assert_eq!(Rank::Eight.to_string(), "8");
-        assert_eq!(Rank::Seven.to_string(), "7");
-        assert_eq!(Rank::Six.to_string(), "6");
-        assert_eq!(Rank::Five.to_string(), "5");
-        assert_eq!(Rank::Four.to_string(), "4");
-        assert_eq!(Rank::Trey.to_string(), "3");
-        assert_eq!(Rank::Deuce.to_string(), "2");
+    fn try_from(c: char) -> Result<Self, Self::Error> {
+        (&c).try_into()
     }
 }
 
-impl From<&Rank> for usize {
+impl FromStr for Rank {
+    type Err = ();
+
+    fn from_str(value: &str) -> Result<Self, Self::Err> {
+        if let Some(c) = value.chars().nth(0) {
+            c.try_into()
+        } else {
+            Err(())
+        }
+    }
+}
+
+impl From<&Rank> for u8 {
     fn from(rank: &Rank) -> Self {
         match rank {
             Rank::Ace => 0,
@@ -147,88 +127,474 @@ impl From<&Rank> for usize {
     }
 }
 
-impl From<Rank> for usize {
+impl From<Rank> for u8 {
     fn from(rank: Rank) -> Self {
-        usize::from(&rank)
+        u8::from(&rank)
     }
 }
 
-#[cfg(test)]
-mod tests_usize_from_rank {
-    use super::*;
-
-    #[test]
-    fn it_converts_to_usize() {
-        assert_eq!(usize::from(Rank::Ace), 0);
-        assert_eq!(usize::from(Rank::King), 1);
-        assert_eq!(usize::from(Rank::Queen), 2);
-        assert_eq!(usize::from(Rank::Jack), 3);
-        assert_eq!(usize::from(Rank::Ten), 4);
-        assert_eq!(usize::from(Rank::Nine), 5);
-        assert_eq!(usize::from(Rank::Eight), 6);
-        assert_eq!(usize::from(Rank::Seven), 7);
-        assert_eq!(usize::from(Rank::Six), 8);
-        assert_eq!(usize::from(Rank::Five), 9);
-        assert_eq!(usize::from(Rank::Four), 10);
-        assert_eq!(usize::from(Rank::Trey), 11);
-        assert_eq!(usize::from(Rank::Deuce), 12);
-    }
-}
-
-impl FromStr for Rank {
-    type Err = ParseRankError;
-
-    fn from_str(v: &str) -> Result<Self, Self::Err> {
-        match v {
-            "A" => Ok(Rank::Ace),
-            "K" => Ok(Rank::King),
-            "Q" => Ok(Rank::Queen),
-            "J" => Ok(Rank::Jack),
-            "T" => Ok(Rank::Ten),
-            "9" => Ok(Rank::Nine),
-            "8" => Ok(Rank::Eight),
-            "7" => Ok(Rank::Seven),
-            "6" => Ok(Rank::Six),
-            "5" => Ok(Rank::Five),
-            "4" => Ok(Rank::Four),
-            "3" => Ok(Rank::Trey),
-            "2" => Ok(Rank::Deuce),
-            &_ => Err(ParseRankError(v.to_string())),
+impl From<&Rank> for char {
+    fn from(value: &Rank) -> Self {
+        match value {
+            Rank::Ace => 'A',
+            Rank::King => 'K',
+            Rank::Queen => 'Q',
+            Rank::Jack => 'J',
+            Rank::Ten => 'T',
+            Rank::Nine => '9',
+            Rank::Eight => '8',
+            Rank::Seven => '7',
+            Rank::Six => '6',
+            Rank::Five => '5',
+            Rank::Four => '4',
+            Rank::Trey => '3',
+            Rank::Deuce => '2',
         }
     }
 }
 
-#[cfg(test)]
-mod tests_from_str {
-    use super::*;
-
-    #[test]
-    fn it_can_be_created_from_str() {
-        assert_eq!("A".parse::<Rank>().unwrap(), Rank::Ace);
-        assert_eq!("K".parse::<Rank>().unwrap(), Rank::King);
-        assert_eq!("Q".parse::<Rank>().unwrap(), Rank::Queen);
-        assert_eq!("J".parse::<Rank>().unwrap(), Rank::Jack);
-        assert_eq!("T".parse::<Rank>().unwrap(), Rank::Ten);
-        assert_eq!("9".parse::<Rank>().unwrap(), Rank::Nine);
-        assert_eq!("8".parse::<Rank>().unwrap(), Rank::Eight);
-        assert_eq!("7".parse::<Rank>().unwrap(), Rank::Seven);
-        assert_eq!("6".parse::<Rank>().unwrap(), Rank::Six);
-        assert_eq!("5".parse::<Rank>().unwrap(), Rank::Five);
-        assert_eq!("4".parse::<Rank>().unwrap(), Rank::Four);
-        assert_eq!("3".parse::<Rank>().unwrap(), Rank::Trey);
-        assert_eq!("2".parse::<Rank>().unwrap(), Rank::Deuce);
-        assert_eq!(
-            "X".parse::<Rank>().unwrap_err().to_string(),
-            "X is not a valid string for a rank.".to_string()
-        );
+impl From<Rank> for char {
+    fn from(value: Rank) -> Self {
+        char::from(&value)
     }
 }
 
-#[derive(Debug)]
-pub struct ParseRankError(String);
+#[cfg(test)]
+mod tests {
+    use super::*;
 
-impl Display for ParseRankError {
-    fn fmt(&self, f: &mut Formatter) -> core::fmt::Result {
-        write!(f, "{} is not a valid string for a rank.", self.0)
+    mod display {
+        use super::*;
+
+        #[test]
+        fn it_parses_into_a() {
+            assert_eq!(Rank::Ace.to_string(), "A");
+        }
+
+        #[test]
+        fn it_parses_into_k() {
+            assert_eq!(Rank::King.to_string(), "K");
+        }
+
+        #[test]
+        fn it_parses_into_q() {
+            assert_eq!(Rank::Queen.to_string(), "Q");
+        }
+
+        #[test]
+        fn it_parses_into_j() {
+            assert_eq!(Rank::Jack.to_string(), "J");
+        }
+
+        #[test]
+        fn it_parses_into_t() {
+            assert_eq!(Rank::Ten.to_string(), "T");
+        }
+
+        #[test]
+        fn it_parses_into_9() {
+            assert_eq!(Rank::Nine.to_string(), "9");
+        }
+
+        #[test]
+        fn it_parses_into_8() {
+            assert_eq!(Rank::Eight.to_string(), "8");
+        }
+
+        #[test]
+        fn it_parses_into_7() {
+            assert_eq!(Rank::Seven.to_string(), "7");
+        }
+
+        #[test]
+        fn it_parses_into_6() {
+            assert_eq!(Rank::Six.to_string(), "6");
+        }
+
+        #[test]
+        fn it_parses_into_5() {
+            assert_eq!(Rank::Five.to_string(), "5");
+        }
+
+        #[test]
+        fn it_parses_into_4() {
+            assert_eq!(Rank::Four.to_string(), "4");
+        }
+
+        #[test]
+        fn it_parses_into_3() {
+            assert_eq!(Rank::Trey.to_string(), "3");
+        }
+
+        #[test]
+        fn it_parses_into_2() {
+            assert_eq!(Rank::Deuce.to_string(), "2");
+        }
+    }
+
+    mod try_from_char {
+        use super::*;
+
+        #[test]
+        fn it_parses_into_ace() {
+            let result: Result<Rank, ()> = 'A'.try_into();
+
+            assert_eq!(result.unwrap(), Rank::Ace);
+        }
+
+        #[test]
+        fn it_parses_into_king() {
+            let result: Result<Rank, ()> = 'K'.try_into();
+
+            assert_eq!(result.unwrap(), Rank::King);
+        }
+
+        #[test]
+        fn it_parses_into_queen() {
+            let result: Result<Rank, ()> = 'Q'.try_into();
+
+            assert_eq!(result.unwrap(), Rank::Queen);
+        }
+
+        #[test]
+        fn it_parses_into_jack() {
+            let result: Result<Rank, ()> = 'J'.try_into();
+
+            assert_eq!(result.unwrap(), Rank::Jack);
+        }
+
+        #[test]
+        fn it_parses_into_ten() {
+            let result: Result<Rank, ()> = 'T'.try_into();
+
+            assert_eq!(result.unwrap(), Rank::Ten);
+        }
+
+        #[test]
+        fn it_parses_into_nine() {
+            let result: Result<Rank, ()> = '9'.try_into();
+
+            assert_eq!(result.unwrap(), Rank::Nine);
+        }
+
+        #[test]
+        fn it_parses_into_eight() {
+            let result: Result<Rank, ()> = '8'.try_into();
+
+            assert_eq!(result.unwrap(), Rank::Eight);
+        }
+
+        #[test]
+        fn it_parses_into_seven() {
+            let result: Result<Rank, ()> = '7'.try_into();
+
+            assert_eq!(result.unwrap(), Rank::Seven);
+        }
+
+        #[test]
+        fn it_parses_into_six() {
+            let result: Result<Rank, ()> = '6'.try_into();
+
+            assert_eq!(result.unwrap(), Rank::Six);
+        }
+
+        #[test]
+        fn it_parses_into_five() {
+            let result: Result<Rank, ()> = '5'.try_into();
+
+            assert_eq!(result.unwrap(), Rank::Five);
+        }
+
+        #[test]
+        fn it_parses_into_four() {
+            let result: Result<Rank, ()> = '4'.try_into();
+
+            assert_eq!(result.unwrap(), Rank::Four);
+        }
+
+        #[test]
+        fn it_parses_into_three() {
+            let result: Result<Rank, ()> = '3'.try_into();
+
+            assert_eq!(result.unwrap(), Rank::Trey);
+        }
+
+        #[test]
+        fn it_parses_into_deuce() {
+            let result: Result<Rank, ()> = '2'.try_into();
+
+            assert_eq!(result.unwrap(), Rank::Deuce);
+        }
+
+        #[test]
+        fn it_failes_parsing() {
+            let result: Result<Rank, ()> = 'X'.try_into();
+
+            assert_eq!(result.is_err(), true);
+        }
+    }
+
+    mod from_str {
+        use super::*;
+
+        #[test]
+        fn it_parses_into_ace() {
+            assert_eq!("A".parse::<Rank>().unwrap(), Rank::Ace);
+        }
+
+        #[test]
+        fn it_parses_into_king() {
+            assert_eq!("K".parse::<Rank>().unwrap(), Rank::King);
+        }
+
+        #[test]
+        fn it_parses_into_queen() {
+            assert_eq!("Q".parse::<Rank>().unwrap(), Rank::Queen);
+        }
+
+        #[test]
+        fn it_parses_into_jack() {
+            assert_eq!("J".parse::<Rank>().unwrap(), Rank::Jack);
+        }
+
+        #[test]
+        fn it_parses_into_ten() {
+            assert_eq!("T".parse::<Rank>().unwrap(), Rank::Ten);
+        }
+
+        #[test]
+        fn it_parses_into_nine() {
+            assert_eq!("9".parse::<Rank>().unwrap(), Rank::Nine);
+        }
+
+        #[test]
+        fn it_parses_into_eight() {
+            assert_eq!("8".parse::<Rank>().unwrap(), Rank::Eight);
+        }
+
+        #[test]
+        fn it_parses_into_seven() {
+            assert_eq!("7".parse::<Rank>().unwrap(), Rank::Seven);
+        }
+
+        #[test]
+        fn it_parses_into_six() {
+            assert_eq!("6".parse::<Rank>().unwrap(), Rank::Six);
+        }
+
+        #[test]
+        fn it_parses_into_five() {
+            assert_eq!("5".parse::<Rank>().unwrap(), Rank::Five);
+        }
+
+        #[test]
+        fn it_parses_into_four() {
+            assert_eq!("4".parse::<Rank>().unwrap(), Rank::Four);
+        }
+
+        #[test]
+        fn it_parses_into_three() {
+            assert_eq!("3".parse::<Rank>().unwrap(), Rank::Trey);
+        }
+
+        #[test]
+        fn it_parses_into_deuce() {
+            assert_eq!("2".parse::<Rank>().unwrap(), Rank::Deuce);
+        }
+
+        #[test]
+        fn it_failes_parsing() {
+            assert_eq!("X".parse::<Rank>().is_err(), true);
+        }
+    }
+
+    mod u8_from_rank {
+        use super::*;
+
+        #[test]
+        fn it_parses_into_0() {
+            let num: u8 = Rank::Ace.into();
+
+            assert_eq!(num, 0);
+        }
+
+        #[test]
+        fn it_parses_into_1() {
+            let num: u8 = Rank::King.into();
+
+            assert_eq!(num, 1);
+        }
+
+        #[test]
+        fn it_parses_into_2() {
+            let num: u8 = Rank::Queen.into();
+
+            assert_eq!(num, 2);
+        }
+
+        #[test]
+        fn it_parses_into_3() {
+            let num: u8 = Rank::Jack.into();
+
+            assert_eq!(num, 3);
+        }
+
+        #[test]
+        fn it_parses_into_4() {
+            let num: u8 = Rank::Ten.into();
+
+            assert_eq!(num, 4);
+        }
+
+        #[test]
+        fn it_parses_into_5() {
+            let num: u8 = Rank::Nine.into();
+
+            assert_eq!(num, 5);
+        }
+
+        #[test]
+        fn it_parses_into_6() {
+            let num: u8 = Rank::Eight.into();
+
+            assert_eq!(num, 6);
+        }
+
+        #[test]
+        fn it_parses_into_7() {
+            let num: u8 = Rank::Seven.into();
+
+            assert_eq!(num, 7);
+        }
+
+        #[test]
+        fn it_parses_into_8() {
+            let num: u8 = Rank::Six.into();
+
+            assert_eq!(num, 8);
+        }
+
+        #[test]
+        fn it_parses_into_9() {
+            let num: u8 = Rank::Five.into();
+
+            assert_eq!(num, 9);
+        }
+
+        #[test]
+        fn it_parses_into_10() {
+            let num: u8 = Rank::Four.into();
+
+            assert_eq!(num, 10);
+        }
+
+        #[test]
+        fn it_parses_into_11() {
+            let num: u8 = Rank::Trey.into();
+
+            assert_eq!(num, 11);
+        }
+
+        #[test]
+        fn it_parses_into_12() {
+            let num: u8 = Rank::Deuce.into();
+
+            assert_eq!(num, 12);
+        }
+    }
+
+    mod char_from_rank {
+        use super::*;
+
+        #[test]
+        fn it_parses_into_a() {
+            let c: char = Rank::Ace.into();
+
+            assert_eq!(c, 'A');
+        }
+
+        #[test]
+        fn it_parses_into_k() {
+            let c: char = Rank::King.into();
+
+            assert_eq!(c, 'K');
+        }
+
+        #[test]
+        fn it_parses_into_q() {
+            let c: char = Rank::Queen.into();
+
+            assert_eq!(c, 'Q');
+        }
+
+        #[test]
+        fn it_parses_into_j() {
+            let c: char = Rank::Jack.into();
+
+            assert_eq!(c, 'J');
+        }
+
+        #[test]
+        fn it_parses_into_t() {
+            let c: char = Rank::Ten.into();
+
+            assert_eq!(c, 'T');
+        }
+
+        #[test]
+        fn it_parses_into_9() {
+            let c: char = Rank::Nine.into();
+
+            assert_eq!(c, '9');
+        }
+
+        #[test]
+        fn it_parses_into_8() {
+            let c: char = Rank::Eight.into();
+
+            assert_eq!(c, '8');
+        }
+
+        #[test]
+        fn it_parses_into_7() {
+            let c: char = Rank::Seven.into();
+
+            assert_eq!(c, '7');
+        }
+
+        #[test]
+        fn it_parses_into_6() {
+            let c: char = Rank::Six.into();
+
+            assert_eq!(c, '6');
+        }
+
+        #[test]
+        fn it_parses_into_5() {
+            let c: char = Rank::Five.into();
+
+            assert_eq!(c, '5');
+        }
+
+        #[test]
+        fn it_parses_into_4() {
+            let c: char = Rank::Four.into();
+
+            assert_eq!(c, '4');
+        }
+
+        #[test]
+        fn it_parses_into_3() {
+            let c: char = Rank::Trey.into();
+
+            assert_eq!(c, '3');
+        }
+
+        #[test]
+        fn it_parses_into_2() {
+            let c: char = Rank::Deuce.into();
+
+            assert_eq!(c, '2');
+        }
     }
 }

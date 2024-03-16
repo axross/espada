@@ -57,36 +57,39 @@ impl FromStr for CardPair {
 }
 
 #[cfg(test)]
-mod tests_from_str {
-    use crate::card::{Rank, Suit};
-
+mod tests {
     use super::*;
 
-    #[test]
-    fn it_parses_str_into_card_set_askc() {
-        assert_eq!(
-            CardPair::from_str("AsKc").unwrap(),
-            CardPair::new(
-                Card::new(Rank::Ace, Suit::Spade),
-                Card::new(Rank::King, Suit::Club),
-            )
-        );
-    }
+    mod tests_from_str {
+        use super::*;
+        use crate::card::{Rank, Suit};
 
-    #[test]
-    fn it_returns_error_when_invalid_length() {
-        assert_eq!(
-            CardPair::from_str("As Kc").unwrap_err(),
-            ParseCardPairError::InvalidLength(5),
-        );
-    }
+        #[test]
+        fn it_parses_str_into_card_set_askc() {
+            assert_eq!(
+                CardPair::from_str("AsKc").unwrap(),
+                CardPair::new(
+                    Card::new(Rank::Ace, Suit::Spade),
+                    Card::new(Rank::King, Suit::Club),
+                )
+            );
+        }
 
-    #[test]
-    fn it_returns_error_when_invalid_string() {
-        assert_eq!(
-            CardPair::from_str("AsKj").unwrap_err(),
-            ParseCardPairError::InvalidCardStr("Kj".to_string()),
-        );
+        #[test]
+        fn it_returns_error_when_invalid_length() {
+            assert_eq!(
+                CardPair::from_str("As Kc").unwrap_err(),
+                ParseCardPairError::InvalidLength(5),
+            );
+        }
+
+        #[test]
+        fn it_returns_error_when_invalid_string() {
+            assert_eq!(
+                CardPair::from_str("AsKj").unwrap_err(),
+                ParseCardPairError::InvalidCardStr("Kj".to_string()),
+            );
+        }
     }
 }
 

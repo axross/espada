@@ -9072,7 +9072,7 @@ fn find_flush_suit<'c>(cards: impl Iterator<Item = &'c Card>) -> Option<Suit> {
 
     for card in cards {
         let suit = card.suit();
-        let suit_index: usize = suit.into();
+        let suit_index = u8::from(suit) as usize;
 
         suit_counts[suit_index] += 1;
 
@@ -9131,7 +9131,7 @@ fn hash_for_rainbow<'c>(cards: impl Iterator<Item = &'c Card>) -> u32 {
     let mut remaining_card_len: u8 = 0;
 
     for card in cards {
-        let card_i: usize = card.rank().into();
+        let card_i = u8::from(card.rank()) as usize;
 
         card_len_each_rank[card_i] += 1;
         remaining_card_len += 1;
@@ -9140,7 +9140,7 @@ fn hash_for_rainbow<'c>(cards: impl Iterator<Item = &'c Card>) -> u32 {
     let mut hash: u32 = 0;
 
     for rank in RANKS {
-        let rank_i: usize = rank.into();
+        let rank_i = u8::from(rank) as usize;
         let len: u8 = card_len_each_rank[rank_i];
 
         if len == 0 {

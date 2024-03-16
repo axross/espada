@@ -1,6 +1,4 @@
-use super::{Card, Rank};
 use core::fmt::{Display, Formatter};
-use core::ops::BitOr;
 use core::str::FromStr;
 
 #[derive(Debug, PartialEq, Eq, Hash, PartialOrd, Ord, Clone, Copy)]
@@ -11,89 +9,49 @@ pub enum Suit {
     Club,
 }
 
-impl BitOr<Rank> for Suit {
-    type Output = Card;
-
-    fn bitor(self, rank: Rank) -> Self::Output {
-        Card::new(rank, self)
-    }
-}
-
-#[cfg(test)]
-mod tests_bitor_with_rank {
-    use super::*;
-
-    #[test]
-    fn it_creates_card_by_bitor_with_rank() {
-        assert_eq!(Suit::Spade | Rank::Ace, Card::new(Rank::Ace, Suit::Spade));
-        assert_eq!(
-            Suit::Heart | Rank::Queen,
-            Card::new(Rank::Queen, Suit::Heart)
-        );
-        assert_eq!(
-            Suit::Diamond | Rank::Eight,
-            Card::new(Rank::Eight, Suit::Diamond)
-        );
-        assert_eq!(Suit::Club | Rank::Deuce, Card::new(Rank::Deuce, Suit::Club));
-    }
-}
-
 impl Display for Suit {
     fn fmt(&self, f: &mut Formatter) -> core::fmt::Result {
-        match self {
-            Suit::Spade => write!(f, "s"),
-            Suit::Heart => write!(f, "h"),
-            Suit::Diamond => write!(f, "d"),
-            Suit::Club => write!(f, "c"),
+        let c: char = self.into();
+
+        c.to_string().fmt(f)
+    }
+}
+
+impl TryFrom<&char> for Suit {
+    type Error = ();
+
+    fn try_from(c: &char) -> Result<Self, Self::Error> {
+        match c {
+            's' => Ok(Suit::Spade),
+            'h' => Ok(Suit::Heart),
+            'd' => Ok(Suit::Diamond),
+            'c' => Ok(Suit::Club),
+            _ => Err(()),
         }
     }
 }
 
-#[cfg(test)]
-mod tests_display {
-    use super::*;
+impl TryFrom<char> for Suit {
+    type Error = ();
 
-    #[test]
-    fn it_formats() {
-        assert_eq!(format!("{}", Suit::Spade), "s");
-        assert_eq!(format!("{}", Suit::Heart), "h");
-        assert_eq!(format!("{}", Suit::Diamond), "d");
-        assert_eq!(format!("{}", Suit::Club), "c");
+    fn try_from(c: char) -> Result<Self, Self::Error> {
+        (&c).try_into()
     }
 }
 
 impl FromStr for Suit {
-    type Err = ParseSuitError;
+    type Err = ();
 
-    fn from_str(v: &str) -> Result<Self, Self::Err> {
-        match v {
-            "s" => Ok(Suit::Spade),
-            "h" => Ok(Suit::Heart),
-            "d" => Ok(Suit::Diamond),
-            "c" => Ok(Suit::Club),
-            _ => Err(ParseSuitError(v.to_string())),
+    fn from_str(value: &str) -> Result<Self, Self::Err> {
+        if let Some(c) = value.chars().nth(0) {
+            c.try_into()
+        } else {
+            Err(())
         }
     }
 }
 
-#[cfg(test)]
-mod tests_from_str {
-    use super::*;
-
-    #[test]
-    fn it_can_be_created_from_str() {
-        assert_eq!("s".parse::<Suit>().unwrap(), Suit::Spade);
-        assert_eq!("h".parse::<Suit>().unwrap(), Suit::Heart);
-        assert_eq!("d".parse::<Suit>().unwrap(), Suit::Diamond);
-        assert_eq!("c".parse::<Suit>().unwrap(), Suit::Club);
-        assert_eq!(
-            "x".parse::<Suit>().unwrap_err().to_string(),
-            "x is not a valid string for a suit.".to_string()
-        );
-    }
-}
-
-impl From<&Suit> for usize {
+impl From<&Suit> for u8 {
     fn from(suit: &Suit) -> Self {
         match suit {
             Suit::Spade => 0,
@@ -104,30 +62,187 @@ impl From<&Suit> for usize {
     }
 }
 
-impl From<Suit> for usize {
+impl From<Suit> for u8 {
     fn from(suit: Suit) -> Self {
-        usize::from(&suit)
+        u8::from(&suit)
+    }
+}
+
+impl From<&Suit> for char {
+    fn from(value: &Suit) -> Self {
+        match value {
+            Suit::Spade => 's',
+            Suit::Heart => 'h',
+            Suit::Diamond => 'd',
+            Suit::Club => 'c',
+        }
+    }
+}
+
+impl From<Suit> for char {
+    fn from(value: Suit) -> Self {
+        char::from(&value)
     }
 }
 
 #[cfg(test)]
-mod tests_usize_from_suit {
+mod tests {
     use super::*;
 
-    #[test]
-    fn it_converts_to_usize() {
-        assert_eq!(usize::from(&Suit::Spade), 0);
-        assert_eq!(usize::from(&Suit::Heart), 1);
-        assert_eq!(usize::from(&Suit::Diamond), 2);
-        assert_eq!(usize::from(&Suit::Club), 3);
+    mod display {
+        use super::*;
+
+        #[test]
+        fn it_parses_into_s() {
+            assert_eq!(Suit::Spade.to_string(), "s");
+        }
+
+        #[test]
+        fn it_parses_into_k() {
+            assert_eq!(Suit::Heart.to_string(), "h");
+        }
+
+        #[test]
+        fn it_parses_into_q() {
+            assert_eq!(Suit::Diamond.to_string(), "d");
+        }
+
+        #[test]
+        fn it_parses_into_j() {
+            assert_eq!(Suit::Club.to_string(), "c");
+        }
     }
-}
 
-#[derive(Debug)]
-pub struct ParseSuitError(String);
+    mod try_from_char {
+        use super::*;
 
-impl Display for ParseSuitError {
-    fn fmt(&self, f: &mut Formatter) -> core::fmt::Result {
-        write!(f, "{} is not a valid string for a suit.", self.0)
+        #[test]
+        fn it_parses_into_spade() {
+            let result: Result<Suit, ()> = 's'.try_into();
+
+            assert_eq!(result.unwrap(), Suit::Spade);
+        }
+
+        #[test]
+        fn it_parses_into_heart() {
+            let result: Result<Suit, ()> = 'h'.try_into();
+
+            assert_eq!(result.unwrap(), Suit::Heart);
+        }
+
+        #[test]
+        fn it_parses_into_diamond() {
+            let result: Result<Suit, ()> = 'd'.try_into();
+
+            assert_eq!(result.unwrap(), Suit::Diamond);
+        }
+
+        #[test]
+        fn it_parses_into_club() {
+            let result: Result<Suit, ()> = 'c'.try_into();
+
+            assert_eq!(result.unwrap(), Suit::Club);
+        }
+
+        #[test]
+        fn it_failes_parsing() {
+            let result: Result<Suit, ()> = 'X'.try_into();
+
+            assert_eq!(result.is_err(), true);
+        }
+    }
+
+    mod from_str {
+        use super::*;
+
+        #[test]
+        fn it_parses_into_spade() {
+            assert_eq!("s".parse::<Suit>().unwrap(), Suit::Spade);
+        }
+
+        #[test]
+        fn it_parses_into_heart() {
+            assert_eq!("h".parse::<Suit>().unwrap(), Suit::Heart);
+        }
+
+        #[test]
+        fn it_parses_into_diamond() {
+            assert_eq!("d".parse::<Suit>().unwrap(), Suit::Diamond);
+        }
+
+        #[test]
+        fn it_parses_into_club() {
+            assert_eq!("c".parse::<Suit>().unwrap(), Suit::Club);
+        }
+
+        #[test]
+        fn it_failes_parsing() {
+            assert_eq!("X".parse::<Suit>().is_err(), true);
+        }
+    }
+
+    mod u8_from_rank {
+        use super::*;
+
+        #[test]
+        fn it_parses_into_0() {
+            let num: u8 = Suit::Spade.into();
+
+            assert_eq!(num, 0);
+        }
+
+        #[test]
+        fn it_parses_into_1() {
+            let num: u8 = Suit::Heart.into();
+
+            assert_eq!(num, 1);
+        }
+
+        #[test]
+        fn it_parses_into_2() {
+            let num: u8 = Suit::Diamond.into();
+
+            assert_eq!(num, 2);
+        }
+
+        #[test]
+        fn it_parses_into_3() {
+            let num: u8 = Suit::Club.into();
+
+            assert_eq!(num, 3);
+        }
+    }
+
+    #[cfg(test)]
+    mod char_from_rank {
+        use super::*;
+
+        #[test]
+        fn it_parses_into_s() {
+            let c: char = Suit::Spade.into();
+
+            assert_eq!(c, 's');
+        }
+
+        #[test]
+        fn it_parses_into_h() {
+            let c: char = Suit::Heart.into();
+
+            assert_eq!(c, 'h');
+        }
+
+        #[test]
+        fn it_parses_into_d() {
+            let c: char = Suit::Diamond.into();
+
+            assert_eq!(c, 'd');
+        }
+
+        #[test]
+        fn it_parses_into_c() {
+            let c: char = Suit::Club.into();
+
+            assert_eq!(c, 'c');
+        }
     }
 }

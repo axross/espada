@@ -133,9 +133,6 @@ impl Iterator for FlopExhaustiveEvaluatorIterator {
         self.current_used_cards.insert(turn);
         self.current_used_cards.insert(river);
 
-        // self.current_deck.remove(self.current_river_index as usize);
-        // self.current_deck.remove(self.current_turn_index as usize);
-
         let mut player_card_pairs = vec![];
         let mut probability: f32 = 1.0;
 
