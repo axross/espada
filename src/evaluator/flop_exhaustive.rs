@@ -1,3 +1,5 @@
+use std::collections::HashSet;
+
 use super::showdown::Showdown;
 use crate::card::{Card, RankRange, SuitRange};
 use crate::hand_range::{CardPair, HandRange};
@@ -64,8 +66,9 @@ pub struct FlopExhaustiveEvaluatorIterator {
     turn_to: u8,
     river_to: u8,
     player_entries: Vec<Vec<(CardPair, f32)>>,
-    current_deck: Vec<Card>,
-    current_board: Vec<Card>,
+    current_deck: [Card; 49],
+    current_board: [Option<Card>; 5],
+    current_used_cards: HashSet<Card>,
     current_turn_index: u8,
     current_river_index: u8,
     current_player_indexes: Vec<u8>,
@@ -93,18 +96,19 @@ impl FlopExhaustiveEvaluatorIterator {
             }
         }
 
-        let mut current_board = Vec::with_capacity(5);
+        let mut current_board = [None; 5];
 
-        for card in evaluator.board.iter() {
-            current_board.push(*card);
+        for (i, card) in evaluator.board.iter().enumerate() {
+            current_board[i] = Some(*card);
         }
 
         Self {
             turn_to: evaluator.turn_to,
             river_to: evaluator.river_to,
             player_entries,
-            current_deck,
+            current_deck: current_deck.try_into().unwrap(),
             current_board,
+            current_used_cards: HashSet::with_capacity(2 + evaluator.players.len() * 2),
             current_turn_index: evaluator.turn_from,
             current_river_index: evaluator.river_from,
             current_player_indexes: vec![0; evaluator.players.len()],
@@ -123,33 +127,48 @@ impl Iterator for FlopExhaustiveEvaluatorIterator {
         let turn = self.current_deck[self.current_turn_index as usize];
         let river = self.current_deck[self.current_river_index as usize];
 
-        self.current_board.push(turn);
-        self.current_board.push(river);
+        self.current_board[3] = Some(turn);
+        self.current_board[4] = Some(river);
 
-        self.current_deck.remove(self.current_river_index as usize);
-        self.current_deck.remove(self.current_turn_index as usize);
+        self.current_used_cards.insert(turn);
+        self.current_used_cards.insert(river);
+
+        // self.current_deck.remove(self.current_river_index as usize);
+        // self.current_deck.remove(self.current_turn_index as usize);
 
         let mut player_card_pairs = vec![];
         let mut probability: f32 = 1.0;
 
+        let mut is_materialized = true;
+
         for (player_index, player_entry) in self.player_entries.iter().enumerate() {
             let entry = player_entry[self.current_player_indexes[player_index] as usize];
+
+            if self.current_used_cards.contains(&entry.0[0])
+                || self.current_used_cards.contains(&entry.0[1])
+            {
+                is_materialized = false;
+            }
 
             player_card_pairs.push(entry.0);
             probability *= entry.1;
         }
 
-        let showdown = Showdown::new(
-            player_card_pairs,
-            [
-                self.current_board[0],
-                self.current_board[1],
-                self.current_board[2],
-                self.current_board[3],
-                self.current_board[4],
-            ],
-            probability,
-        );
+        let mut showdown = None;
+
+        if is_materialized {
+            showdown = Showdown::new(
+                player_card_pairs,
+                [
+                    self.current_board[0].unwrap(),
+                    self.current_board[1].unwrap(),
+                    self.current_board[2].unwrap(),
+                    self.current_board[3].unwrap(),
+                    self.current_board[4].unwrap(),
+                ],
+                probability,
+            );
+        }
 
         let mut player_index_to_increment = None;
 
@@ -163,13 +182,10 @@ impl Iterator for FlopExhaustiveEvaluatorIterator {
             }
         }
 
-        self.current_board.pop();
-        self.current_board.pop();
+        self.current_board[3] = None;
+        self.current_board[4] = None;
 
-        self.current_deck
-            .insert(self.current_turn_index as usize, turn);
-        self.current_deck
-            .insert(self.current_river_index as usize, river);
+        self.current_used_cards.clear();
 
         if let Some(player_index_to_increment) = player_index_to_increment {
             self.current_player_indexes[player_index_to_increment] += 1;

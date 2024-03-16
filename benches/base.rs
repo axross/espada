@@ -2,7 +2,6 @@ use criterion::{criterion_group, criterion_main, Criterion};
 use espada::card::Card;
 use espada::evaluator::FlopExhaustiveEvaluator;
 use std::collections::HashMap;
-use std::time::Duration;
 
 fn evaluate() {
     let board: Vec<Card> = ["Ks", "8d", "2h"]
@@ -43,10 +42,7 @@ fn criterion_benchmark(c: &mut Criterion) {
 
 criterion_group! {
     name = base;
-    config = Criterion::default()
-        .sample_size(50)
-        .warm_up_time(Duration::from_secs(5))
-        .measurement_time(Duration::from_secs(60));
+    config = Criterion::default();
     targets = criterion_benchmark
 }
 
