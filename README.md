@@ -1,6 +1,17 @@
 # ♠️ espada
 
+- 方針
+  - `Board` はSizedなのでArray互換のものでいい。include_allなども必要ない
+  - `Deck` はBitSetにする
+  - `CardPair` はBitSet互換にする
+  - 
+
 Texas Hold'em poker odds evaluator.
+
+![https://crates.io/crates/espada](https://img.shields.io/crates/v/espada) ![Recent Downloads](https://img.shields.io/crates/dr/espada) ![License](https://img.shields.io/crates/l/espada/0.1.0)
+
+- [API Docs](https://docs.rs/espada/latest/espada/)
+- [Examples](/examples)
 
 ## Quickstart
 
@@ -52,3 +63,7 @@ fn main() {
     }
 }
 ```
+
+## License
+
+[Here](/LICENSE.txt)

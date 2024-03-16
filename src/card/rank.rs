@@ -1,9 +1,7 @@
+use super::{Card, Suit};
 use core::fmt::{Display, Formatter};
 use core::ops::BitOr;
 use core::str::FromStr;
-
-use crate::card::Card;
-use crate::suit::Suit;
 
 #[derive(Debug, PartialEq, Eq, Hash, PartialOrd, Ord, Clone, Copy)]
 pub enum Rank {

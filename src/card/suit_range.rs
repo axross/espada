@@ -1,4 +1,4 @@
-use crate::suit::Suit;
+use super::Suit;
 
 // NOTE:
 // ideally Rank struct should implement Step trait and achieve the same job but

@@ -1,7 +1,5 @@
-use crate::card::Card;
-use crate::card_set::CardSet;
-use crate::rank::Rank;
-use crate::suit::Suit;
+use crate::card::{Card, Rank, Suit};
+use crate::hand_range::CardPair;
 
 #[derive(Debug, PartialEq, Eq, Hash, Clone, Copy)]
 pub struct RankPair {
@@ -97,106 +95,106 @@ mod tests_ofsuit {
 }
 
 impl IntoIterator for RankPair {
-    type Item = CardSet;
+    type Item = CardPair;
     type IntoIter = std::vec::IntoIter<Self::Item>;
 
     fn into_iter(self) -> Self::IntoIter {
         match (self.high == self.kicker, self.suited) {
             (true, false) => vec![
-                CardSet::from_iter([
+                CardPair::new(
                     Card::new(self.high, Suit::Spade),
                     Card::new(self.high, Suit::Heart),
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(self.high, Suit::Spade),
                     Card::new(self.high, Suit::Diamond),
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(self.high, Suit::Spade),
                     Card::new(self.high, Suit::Club),
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(self.high, Suit::Heart),
                     Card::new(self.high, Suit::Diamond),
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(self.high, Suit::Heart),
                     Card::new(self.high, Suit::Club),
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(self.high, Suit::Diamond),
                     Card::new(self.high, Suit::Club),
-                ]),
+                ),
             ]
             .into_iter(),
             (false, true) => vec![
-                CardSet::from_iter([
+                CardPair::new(
                     Card::new(self.high, Suit::Spade),
                     Card::new(self.kicker, Suit::Spade),
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(self.high, Suit::Heart),
                     Card::new(self.kicker, Suit::Heart),
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(self.high, Suit::Diamond),
                     Card::new(self.kicker, Suit::Diamond),
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(self.high, Suit::Club),
                     Card::new(self.kicker, Suit::Club),
-                ]),
+                ),
             ]
             .into_iter(),
             (false, false) => vec![
-                CardSet::from_iter([
+                CardPair::new(
                     Card::new(self.high, Suit::Spade),
                     Card::new(self.kicker, Suit::Heart),
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(self.high, Suit::Spade),
                     Card::new(self.kicker, Suit::Diamond),
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(self.high, Suit::Spade),
                     Card::new(self.kicker, Suit::Club),
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(self.high, Suit::Heart),
                     Card::new(self.kicker, Suit::Spade),
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(self.high, Suit::Heart),
                     Card::new(self.kicker, Suit::Diamond),
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(self.high, Suit::Heart),
                     Card::new(self.kicker, Suit::Club),
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(self.high, Suit::Diamond),
                     Card::new(self.kicker, Suit::Spade),
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(self.high, Suit::Diamond),
                     Card::new(self.kicker, Suit::Heart),
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(self.high, Suit::Diamond),
                     Card::new(self.kicker, Suit::Club),
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(self.high, Suit::Club),
                     Card::new(self.kicker, Suit::Spade),
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(self.high, Suit::Club),
                     Card::new(self.kicker, Suit::Heart),
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(self.high, Suit::Club),
                     Card::new(self.kicker, Suit::Diamond),
-                ]),
+                ),
             ]
             .into_iter(),
             _ => panic!(),
@@ -213,30 +211,30 @@ mod tests_into_iter {
         assert_eq!(
             RankPair::pocket(Rank::Jack).into_iter().collect::<Vec<_>>(),
             vec![
-                CardSet::from_iter([
+                CardPair::new(
                     Card::new(Rank::Jack, Suit::Spade),
                     Card::new(Rank::Jack, Suit::Heart),
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(Rank::Jack, Suit::Spade),
                     Card::new(Rank::Jack, Suit::Diamond),
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(Rank::Jack, Suit::Spade),
                     Card::new(Rank::Jack, Suit::Club),
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(Rank::Jack, Suit::Heart),
                     Card::new(Rank::Jack, Suit::Diamond),
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(Rank::Jack, Suit::Heart),
                     Card::new(Rank::Jack, Suit::Club),
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(Rank::Jack, Suit::Diamond),
                     Card::new(Rank::Jack, Suit::Club),
-                ]),
+                ),
             ],
         );
     }
@@ -248,22 +246,22 @@ mod tests_into_iter {
                 .into_iter()
                 .collect::<Vec<_>>(),
             vec![
-                CardSet::from_iter([
+                CardPair::new(
                     Card::new(Rank::Queen, Suit::Spade),
                     Card::new(Rank::Ten, Suit::Spade)
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(Rank::Queen, Suit::Heart),
                     Card::new(Rank::Ten, Suit::Heart)
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(Rank::Queen, Suit::Diamond),
                     Card::new(Rank::Ten, Suit::Diamond)
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(Rank::Queen, Suit::Club),
                     Card::new(Rank::Ten, Suit::Club)
-                ]),
+                ),
             ],
         );
     }
@@ -275,54 +273,54 @@ mod tests_into_iter {
                 .into_iter()
                 .collect::<Vec<_>>(),
             vec![
-                CardSet::from_iter([
+                CardPair::new(
                     Card::new(Rank::Nine, Suit::Spade),
                     Card::new(Rank::Five, Suit::Heart)
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(Rank::Nine, Suit::Spade),
                     Card::new(Rank::Five, Suit::Diamond)
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(Rank::Nine, Suit::Spade),
                     Card::new(Rank::Five, Suit::Club)
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(Rank::Nine, Suit::Heart),
                     Card::new(Rank::Five, Suit::Spade)
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(Rank::Nine, Suit::Heart),
                     Card::new(Rank::Five, Suit::Diamond)
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(Rank::Nine, Suit::Heart),
                     Card::new(Rank::Five, Suit::Club)
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(Rank::Nine, Suit::Diamond),
                     Card::new(Rank::Five, Suit::Spade)
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(Rank::Nine, Suit::Diamond),
                     Card::new(Rank::Five, Suit::Heart)
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(Rank::Nine, Suit::Diamond),
                     Card::new(Rank::Five, Suit::Club)
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(Rank::Nine, Suit::Club),
                     Card::new(Rank::Five, Suit::Spade)
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(Rank::Nine, Suit::Club),
                     Card::new(Rank::Five, Suit::Heart)
-                ]),
-                CardSet::from_iter([
+                ),
+                CardPair::new(
                     Card::new(Rank::Nine, Suit::Club),
                     Card::new(Rank::Five, Suit::Diamond)
-                ]),
+                ),
             ],
         );
     }

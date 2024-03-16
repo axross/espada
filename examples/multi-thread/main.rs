@@ -1,24 +1,31 @@
 mod scope;
 
-use core::str::FromStr;
-use espada::card_set::CardSet;
-use espada::evaluator::postflop_exhaustive::PostflopExhaustiveEvaluator;
+use crate::scope::calculate_scopes;
+use espada::card::Card;
+use espada::evaluator::FlopExhaustiveEvaluator;
 use espada::hand_range::HandRange;
 use std::collections::HashMap;
-
-use crate::scope::calculate_scopes;
 
 fn main() {
     let args: Vec<String> = std::env::args().collect();
 
-    let board = CardSet::from_str(&args[1]).unwrap();
+    let mut board: Vec<Card> = vec![];
+
+    for i in 0..args[1].len() / 2 {
+        let card: Card = args[1][i * 2..i * 2 + 2].parse().unwrap();
+
+        board.push(card);
+    }
+
     let mut players = vec![];
 
     for p in &args[2..] {
-        players.push(HandRange::from_str(p).unwrap())
+        let hand_range: HandRange = p.parse().unwrap();
+
+        players.push(hand_range);
     }
 
-    println!("board: {}", board);
+    println!("board: {:?}", board);
 
     let mut space: u64 = 1176;
 
@@ -39,7 +46,7 @@ fn main() {
     let mut handles = vec![];
 
     for scope in scopes {
-        let board = board_arc.clone();
+        let board: Vec<Card> = board_arc.clone().iter().map(|c| *c).collect();
         let players = players_arc.clone();
 
         let handle = std::thread::spawn(move || {
@@ -52,9 +59,8 @@ fn main() {
                 }
             }
 
-            let evaluator = PostflopExhaustiveEvaluator::scoped(
-                &board,
-                &players,
+            let mut evaluator = FlopExhaustiveEvaluator::new(board, &players);
+            evaluator.scope(
                 scope.turn_from,
                 scope.river_from,
                 scope.turn_to,
@@ -64,13 +70,13 @@ fn main() {
             for showdown in evaluator {
                 for (player_index, player) in showdown.players().into_iter().enumerate() {
                     player_results[player_index]
-                        .get_mut(&player.cards())
+                        .get_mut(&player.hole_cards())
                         .unwrap()
                         .1 += 1;
 
                     if player.is_winner() {
                         player_results[player_index]
-                            .get_mut(&player.cards())
+                            .get_mut(&player.hole_cards())
                             .unwrap()
                             .0 +=
                             1.0 / showdown.winner_len() as f64 * showdown.probability() as f64;
