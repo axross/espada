@@ -1,3 +1,5 @@
+use std::collections::HashSet;
+
 use super::MadeHand;
 use crate::card::Card;
 use crate::hand_range::CardPair;
@@ -15,7 +17,7 @@ impl Showdown {
 
         let mut showdown_players = vec![];
         let mut strongest_index = u16::MAX;
-        let mut winner_indexes = vec![];
+        let mut winner_indexes = HashSet::new();
 
         for (i, player) in players.into_iter().enumerate() {
             if board.contains(&player[0]) || board.contains(&player[1]) {
@@ -41,7 +43,7 @@ impl Showdown {
                     winner_indexes.clear();
                 }
 
-                winner_indexes.push(i);
+                winner_indexes.insert(i);
             }
 
             showdown_players.push(showdown_player);
