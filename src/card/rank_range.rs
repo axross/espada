@@ -1,4 +1,4 @@
-use crate::rank::Rank;
+use super::Rank;
 
 // NOTE:
 // ideally Rank struct should implement Step trait and achieve the same job but
@@ -15,16 +15,16 @@ pub struct RankRange {
 impl RankRange {
     pub fn new(start: Rank, end: Rank) -> RankRange {
         Self {
-            start: start.into(),
-            end: end.into(),
+            start: u8::from(start) as usize,
+            end: u8::from(end) as usize,
             inclusive: false,
         }
     }
 
     pub fn inclusive(start: Rank, end: Rank) -> RankRange {
         Self {
-            start: start.into(),
-            end: end.into(),
+            start: u8::from(start) as usize,
+            end: u8::from(end) as usize,
             inclusive: true,
         }
     }

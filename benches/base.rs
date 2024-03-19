@@ -1,20 +1,19 @@
-use std::collections::HashMap;
-use std::str::FromStr;
-use std::time::Duration;
-
 use criterion::{criterion_group, criterion_main, Criterion};
-use espada::card_set::CardSet;
-use espada::evaluator::postflop_exhaustive::PostflopExhaustiveEvaluator;
-use espada::hand_range::HandRange;
+use espada::card::{Card, Rank, Suit};
+use espada::evaluator::FlopExhaustiveEvaluator;
+use std::collections::HashMap;
 
 fn evaluate() {
-    let board = CardSet::from_str("Ks8d2h").unwrap();
-    let players = vec![
-        HandRange::from_str("TT+").unwrap(),
-        HandRange::from_str("A8s+").unwrap(),
+    let board = [
+        Some(Card::new(Rank::King, Suit::Spade)),
+        Some(Card::new(Rank::Eight, Suit::Diamond)),
+        Some(Card::new(Rank::Deuce, Suit::Heart)),
+        None,
+        None,
     ];
+    let players = vec!["TT+".parse().unwrap(), "A8s+".parse().unwrap()];
 
-    let evaluator = PostflopExhaustiveEvaluator::new(&board, &players);
+    let evaluator = FlopExhaustiveEvaluator::new(&board, &players);
     let mut player_results = vec![HashMap::new(); players.len()];
 
     for (player_index, player) in players.iter().enumerate() {
@@ -26,13 +25,13 @@ fn evaluate() {
     for showdown in evaluator {
         for (player_index, player) in showdown.players().into_iter().enumerate() {
             player_results[player_index]
-                .get_mut(&player.cards())
+                .get_mut(&player.hole_cards())
                 .unwrap()
                 .1 += 1;
 
             if player.is_winner() {
                 player_results[player_index]
-                    .get_mut(&player.cards())
+                    .get_mut(&player.hole_cards())
                     .unwrap()
                     .0 += 1.0 / showdown.winner_len() as f64;
             }
@@ -41,16 +40,13 @@ fn evaluate() {
 }
 
 fn criterion_benchmark(c: &mut Criterion) {
-    c.bench_function("small", |b| b.iter(|| evaluate()));
+    c.bench_function("base", |b| b.iter(|| evaluate()));
 }
 
 criterion_group! {
-    name = small;
-    config = Criterion::default()
-        .sample_size(50)
-        .warm_up_time(Duration::from_secs(5))
-        .measurement_time(Duration::from_secs(60));
+    name = base;
+    config = Criterion::default();
     targets = criterion_benchmark
 }
 
-criterion_main!(small);
+criterion_main!(base);

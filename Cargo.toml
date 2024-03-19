@@ -14,13 +14,11 @@ edition = "2021"
 regex = "1.10.3"
 
 [dev-dependencies]
+cargo-insta = "1.36.1"
 criterion = { version = "0.4", features = ["html_reports"] }
+insta = "1.36.1"
 num_cpus = "1.16.0"
 
 [[bench]]
-name = "small"
-harness = false
-
-[[bench]]
-name = "medium"
+name = "base"
 harness = false

@@ -1,0 +1,4246 @@
+---
+source: src/evaluator/flop_exhaustive.rs
+expression: result
+---
+[
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(6c),
+            Card(2c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(6c),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(6c),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5s),
+            Card(5h),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(5h),
+                ],
+                hand: MadeHand(
+                    187,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(5h),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5s),
+            Card(5d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(5d),
+                ],
+                hand: MadeHand(
+                    187,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(5d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5s),
+            Card(5c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(5c),
+                ],
+                hand: MadeHand(
+                    187,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(5c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5s),
+            Card(4s),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(4s),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(4s),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5s),
+            Card(4h),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(4h),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(4h),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5s),
+            Card(4d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(4d),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(4d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5s),
+            Card(4c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(4c),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(4c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5s),
+            Card(3s),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(3s),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(3s),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5s),
+            Card(3h),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(3h),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(3h),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5s),
+            Card(3d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(3d),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(3d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5s),
+            Card(3c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(3c),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(3c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5s),
+            Card(2h),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(2h),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(2h),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5s),
+            Card(2d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(2d),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(2d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5s),
+            Card(2c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5s),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5h),
+            Card(5d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5h),
+                    Card(5d),
+                ],
+                hand: MadeHand(
+                    187,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5h),
+                    Card(5d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5h),
+            Card(5c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5h),
+                    Card(5c),
+                ],
+                hand: MadeHand(
+                    187,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5h),
+                    Card(5c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5h),
+            Card(4s),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5h),
+                    Card(4s),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5h),
+                    Card(4s),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5h),
+            Card(4h),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5h),
+                    Card(4h),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5h),
+                    Card(4h),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5h),
+            Card(4d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5h),
+                    Card(4d),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5h),
+                    Card(4d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5h),
+            Card(4c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5h),
+                    Card(4c),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5h),
+                    Card(4c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5h),
+            Card(3s),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5h),
+                    Card(3s),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5h),
+                    Card(3s),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5h),
+            Card(3h),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5h),
+                    Card(3h),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5h),
+                    Card(3h),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5h),
+            Card(3d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5h),
+                    Card(3d),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5h),
+                    Card(3d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5h),
+            Card(3c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5h),
+                    Card(3c),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5h),
+                    Card(3c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5h),
+            Card(2h),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5h),
+                    Card(2h),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5h),
+                    Card(2h),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5h),
+            Card(2d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5h),
+                    Card(2d),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5h),
+                    Card(2d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5h),
+            Card(2c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5h),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5h),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5d),
+            Card(5c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5d),
+                    Card(5c),
+                ],
+                hand: MadeHand(
+                    187,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5d),
+                    Card(5c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5d),
+            Card(4s),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5d),
+                    Card(4s),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5d),
+                    Card(4s),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5d),
+            Card(4h),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5d),
+                    Card(4h),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5d),
+                    Card(4h),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5d),
+            Card(4d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5d),
+                    Card(4d),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5d),
+                    Card(4d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5d),
+            Card(4c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5d),
+                    Card(4c),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5d),
+                    Card(4c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5d),
+            Card(3s),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5d),
+                    Card(3s),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5d),
+                    Card(3s),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5d),
+            Card(3h),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5d),
+                    Card(3h),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5d),
+                    Card(3h),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5d),
+            Card(3d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5d),
+                    Card(3d),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5d),
+                    Card(3d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5d),
+            Card(3c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5d),
+                    Card(3c),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5d),
+                    Card(3c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5d),
+            Card(2h),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5d),
+                    Card(2h),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5d),
+                    Card(2h),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5d),
+            Card(2d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5d),
+                    Card(2d),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5d),
+                    Card(2d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5d),
+            Card(2c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5d),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5d),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5c),
+            Card(4s),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5c),
+                    Card(4s),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5c),
+                    Card(4s),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5c),
+            Card(4h),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5c),
+                    Card(4h),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5c),
+                    Card(4h),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5c),
+            Card(4d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5c),
+                    Card(4d),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5c),
+                    Card(4d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5c),
+            Card(4c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5c),
+                    Card(4c),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5c),
+                    Card(4c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5c),
+            Card(3s),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5c),
+                    Card(3s),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5c),
+                    Card(3s),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5c),
+            Card(3h),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5c),
+                    Card(3h),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5c),
+                    Card(3h),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5c),
+            Card(3d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5c),
+                    Card(3d),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5c),
+                    Card(3d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5c),
+            Card(3c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5c),
+                    Card(3c),
+                ],
+                hand: MadeHand(
+                    1683,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5c),
+                    Card(3c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5c),
+            Card(2h),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5c),
+                    Card(2h),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5c),
+                    Card(2h),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5c),
+            Card(2d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5c),
+                    Card(2d),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5c),
+                    Card(2d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(5c),
+            Card(2c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5c),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(5c),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4s),
+            Card(4h),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4s),
+                    Card(4h),
+                ],
+                hand: MadeHand(
+                    188,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4s),
+                    Card(4h),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4s),
+            Card(4d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4s),
+                    Card(4d),
+                ],
+                hand: MadeHand(
+                    188,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4s),
+                    Card(4d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4s),
+            Card(4c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4s),
+                    Card(4c),
+                ],
+                hand: MadeHand(
+                    188,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4s),
+                    Card(4c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4s),
+            Card(3s),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4s),
+                    Card(3s),
+                ],
+                hand: MadeHand(
+                    1684,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4s),
+                    Card(3s),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4s),
+            Card(3h),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4s),
+                    Card(3h),
+                ],
+                hand: MadeHand(
+                    1684,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4s),
+                    Card(3h),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4s),
+            Card(3d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4s),
+                    Card(3d),
+                ],
+                hand: MadeHand(
+                    1684,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4s),
+                    Card(3d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4s),
+            Card(3c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4s),
+                    Card(3c),
+                ],
+                hand: MadeHand(
+                    1684,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4s),
+                    Card(3c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4s),
+            Card(2h),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4s),
+                    Card(2h),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4s),
+                    Card(2h),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4s),
+            Card(2d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4s),
+                    Card(2d),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4s),
+                    Card(2d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4s),
+            Card(2c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4s),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4s),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4h),
+            Card(4d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4h),
+                    Card(4d),
+                ],
+                hand: MadeHand(
+                    188,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4h),
+                    Card(4d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4h),
+            Card(4c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4h),
+                    Card(4c),
+                ],
+                hand: MadeHand(
+                    188,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4h),
+                    Card(4c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4h),
+            Card(3s),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4h),
+                    Card(3s),
+                ],
+                hand: MadeHand(
+                    1684,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4h),
+                    Card(3s),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4h),
+            Card(3h),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4h),
+                    Card(3h),
+                ],
+                hand: MadeHand(
+                    1684,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4h),
+                    Card(3h),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4h),
+            Card(3d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4h),
+                    Card(3d),
+                ],
+                hand: MadeHand(
+                    1684,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4h),
+                    Card(3d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4h),
+            Card(3c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4h),
+                    Card(3c),
+                ],
+                hand: MadeHand(
+                    1684,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4h),
+                    Card(3c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4h),
+            Card(2h),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4h),
+                    Card(2h),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4h),
+                    Card(2h),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4h),
+            Card(2d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4h),
+                    Card(2d),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4h),
+                    Card(2d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4h),
+            Card(2c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4h),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4h),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4d),
+            Card(4c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4d),
+                    Card(4c),
+                ],
+                hand: MadeHand(
+                    188,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4d),
+                    Card(4c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4d),
+            Card(3s),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4d),
+                    Card(3s),
+                ],
+                hand: MadeHand(
+                    1684,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4d),
+                    Card(3s),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4d),
+            Card(3h),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4d),
+                    Card(3h),
+                ],
+                hand: MadeHand(
+                    1684,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4d),
+                    Card(3h),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4d),
+            Card(3d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4d),
+                    Card(3d),
+                ],
+                hand: MadeHand(
+                    1684,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4d),
+                    Card(3d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4d),
+            Card(3c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4d),
+                    Card(3c),
+                ],
+                hand: MadeHand(
+                    1684,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4d),
+                    Card(3c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4d),
+            Card(2h),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4d),
+                    Card(2h),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4d),
+                    Card(2h),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4d),
+            Card(2d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4d),
+                    Card(2d),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4d),
+                    Card(2d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4d),
+            Card(2c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4d),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4d),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4c),
+            Card(3s),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4c),
+                    Card(3s),
+                ],
+                hand: MadeHand(
+                    1684,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4c),
+                    Card(3s),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4c),
+            Card(3h),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4c),
+                    Card(3h),
+                ],
+                hand: MadeHand(
+                    1684,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4c),
+                    Card(3h),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4c),
+            Card(3d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4c),
+                    Card(3d),
+                ],
+                hand: MadeHand(
+                    1684,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4c),
+                    Card(3d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4c),
+            Card(3c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4c),
+                    Card(3c),
+                ],
+                hand: MadeHand(
+                    1684,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4c),
+                    Card(3c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4c),
+            Card(2h),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4c),
+                    Card(2h),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4c),
+                    Card(2h),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4c),
+            Card(2d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4c),
+                    Card(2d),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4c),
+                    Card(2d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(4c),
+            Card(2c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4c),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(4c),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(3s),
+            Card(3h),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3s),
+                    Card(3h),
+                ],
+                hand: MadeHand(
+                    189,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3s),
+                    Card(3h),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(3s),
+            Card(3d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3s),
+                    Card(3d),
+                ],
+                hand: MadeHand(
+                    189,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3s),
+                    Card(3d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(3s),
+            Card(3c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3s),
+                    Card(3c),
+                ],
+                hand: MadeHand(
+                    189,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3s),
+                    Card(3c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(3s),
+            Card(2h),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3s),
+                    Card(2h),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3s),
+                    Card(2h),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(3s),
+            Card(2d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3s),
+                    Card(2d),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3s),
+                    Card(2d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(3s),
+            Card(2c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3s),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3s),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(3h),
+            Card(3d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3h),
+                    Card(3d),
+                ],
+                hand: MadeHand(
+                    189,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3h),
+                    Card(3d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(3h),
+            Card(3c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3h),
+                    Card(3c),
+                ],
+                hand: MadeHand(
+                    189,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3h),
+                    Card(3c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(3h),
+            Card(2h),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3h),
+                    Card(2h),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3h),
+                    Card(2h),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(3h),
+            Card(2d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3h),
+                    Card(2d),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3h),
+                    Card(2d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(3h),
+            Card(2c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3h),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3h),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(3d),
+            Card(3c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3d),
+                    Card(3c),
+                ],
+                hand: MadeHand(
+                    189,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3d),
+                    Card(3c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(3d),
+            Card(2h),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3d),
+                    Card(2h),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3d),
+                    Card(2h),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(3d),
+            Card(2d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3d),
+                    Card(2d),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3d),
+                    Card(2d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(3d),
+            Card(2c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3d),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3d),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(3c),
+            Card(2h),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3c),
+                    Card(2h),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3c),
+                    Card(2h),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(3c),
+            Card(2d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3c),
+                    Card(2d),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3c),
+                    Card(2d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(3c),
+            Card(2c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3c),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(3c),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(2h),
+            Card(2d),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(2h),
+                    Card(2d),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(2h),
+                    Card(2d),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(2h),
+            Card(2c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(2h),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(2h),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+    Showdown {
+        board: [
+            Card(Kh),
+            Card(Kd),
+            Card(Kc),
+            Card(2d),
+            Card(2c),
+        ],
+        players: [
+            ShowdownPlayer {
+                hole_cards: CardPair(As2s),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(2d),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    190,
+                ),
+                win: false,
+            },
+            ShowdownPlayer {
+                hole_cards: CardPair(JdJc),
+                board: [
+                    Card(Kh),
+                    Card(Kd),
+                    Card(Kc),
+                    Card(2d),
+                    Card(2c),
+                ],
+                hand: MadeHand(
+                    181,
+                ),
+                win: true,
+            },
+        ],
+        probability: 1.0,
+    },
+]

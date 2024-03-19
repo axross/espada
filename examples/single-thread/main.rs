@@ -1,20 +1,26 @@
-use core::str::FromStr;
-use espada::card_set::CardSet;
-use espada::evaluator::postflop_exhaustive::PostflopExhaustiveEvaluator;
-use espada::hand_range::HandRange;
+use espada::{card::Card, evaluator::FlopExhaustiveEvaluator, hand_range::HandRange};
 use std::collections::HashMap;
 
 fn main() {
     let args: Vec<String> = std::env::args().collect();
 
-    let board = CardSet::from_str(&args[1]).unwrap();
+    let mut board = [None; 5];
+
+    for i in 0..args[1].len() / 2 {
+        let card: Card = args[1][i * 2..i * 2 + 2].parse().unwrap();
+
+        board[i] = Some(card);
+    }
+
     let mut players = vec![];
 
     for p in &args[2..] {
-        players.push(HandRange::from_str(p).unwrap())
+        let hand_range: HandRange = p.parse().unwrap();
+
+        players.push(hand_range);
     }
 
-    println!("board: {}", board);
+    println!("board: {:?}", board);
 
     let mut player_results = vec![HashMap::new(); players.len()];
     let mut materialized: u64 = 0;
@@ -33,20 +39,20 @@ fn main() {
 
     println!("space: {} patterns", space);
 
-    let evaluator = PostflopExhaustiveEvaluator::new(&board, &players);
+    let evaluator = FlopExhaustiveEvaluator::new(&board, &players);
 
     let instant = std::time::Instant::now();
 
     for showdown in evaluator {
         for (player_index, player) in showdown.players().into_iter().enumerate() {
             player_results[player_index]
-                .get_mut(&player.cards())
+                .get_mut(&player.hole_cards())
                 .unwrap()
                 .1 += 1;
 
             if player.is_winner() {
                 player_results[player_index]
-                    .get_mut(&player.cards())
+                    .get_mut(&player.hole_cards())
                     .unwrap()
                     .0 += 1.0 / showdown.winner_len() as f64 * showdown.probability() as f64;
             }
