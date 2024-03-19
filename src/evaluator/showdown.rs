@@ -1,8 +1,8 @@
-use std::collections::HashSet;
-
 use super::MadeHand;
 use crate::card::Card;
 use crate::hand_range::CardPair;
+use fxhash::FxBuildHasher;
+use std::collections::HashSet;
 
 #[derive(Debug)]
 pub struct Showdown {
@@ -17,7 +17,8 @@ impl Showdown {
 
         let mut showdown_players = vec![];
         let mut strongest_index = u16::MAX;
-        let mut winner_indexes = HashSet::new();
+        let mut winner_indexes =
+            HashSet::with_capacity_and_hasher(players.len(), FxBuildHasher::default());
 
         for (i, player) in players.into_iter().enumerate() {
             if board.contains(&player[0]) || board.contains(&player[1]) {

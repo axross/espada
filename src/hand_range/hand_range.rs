@@ -3,22 +3,23 @@ use crate::card::{Card, Rank, RankRange, Suit, SuitRange};
 use crate::hand_range::{HandRangeToken, HandRangeTokenKind};
 use core::fmt::Display;
 use core::str::FromStr;
+use fxhash::FxBuildHasher;
 use std::collections::{hash_map, HashMap};
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct HandRange(HashMap<CardPair, f32>);
+pub struct HandRange(HashMap<CardPair, f32, FxBuildHasher>);
 
 impl HandRange {
     pub fn empty() -> HandRange {
-        HandRange(HashMap::new())
+        HandRange(HashMap::with_hasher(FxBuildHasher::default()))
     }
 
-    pub fn card_pairs(&self) -> &HashMap<CardPair, f32> {
+    pub fn card_pairs(&self) -> &HashMap<CardPair, f32, FxBuildHasher> {
         &self.0
     }
 
-    pub fn rank_pairs(&self) -> HashMap<RankPair, f32> {
-        let mut rank_pairs = HashMap::<RankPair, f32>::new();
+    pub fn rank_pairs(&self) -> HashMap<RankPair, f32, FxBuildHasher> {
+        let mut rank_pairs = HashMap::with_hasher(FxBuildHasher::default());
 
         for rank in RankRange::all() {
             let example_pocket =
@@ -76,7 +77,7 @@ impl HandRange {
 
     // TODO:
     // this logic sucks. we gotta revisit and rewrite in some appropriate way.
-    pub fn orphan_card_pairs(&self) -> HashMap<CardPair, f32> {
+    pub fn orphan_card_pairs(&self) -> HashMap<CardPair, f32, FxBuildHasher> {
         let mut clone = self.0.clone();
         let rank_pairs = self.rank_pairs();
 
@@ -373,11 +374,11 @@ impl FromStr for HandRange {
     type Err = ();
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let mut map = HashMap::<CardPair, f32>::new();
+        let mut map = HashMap::with_hasher(FxBuildHasher::default());
         let trimmed = s.replace(" ", "");
 
         if trimmed.len() == 0 {
-            return Ok(HandRange(HashMap::new()));
+            return Ok(HandRange(HashMap::with_hasher(FxBuildHasher::default())));
         }
 
         let haystacks = trimmed.split(",");

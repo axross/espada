@@ -1,8 +1,8 @@
-use std::collections::HashSet;
-
 use super::showdown::Showdown;
 use crate::card::{Card, RankRange, SuitRange};
 use crate::hand_range::{CardPair, HandRange};
+use fxhash::FxBuildHasher;
+use std::collections::HashSet;
 
 pub struct FlopExhaustiveEvaluator {
     board: [Option<Card>; 5],
@@ -52,7 +52,7 @@ pub struct FlopExhaustiveEvaluatorIterator {
     player_entries: Vec<Vec<(CardPair, f32)>>,
     current_deck: [Card; 49],
     current_board: [Option<Card>; 5],
-    current_used_cards: HashSet<Card>,
+    current_used_cards: HashSet<Card, FxBuildHasher>,
     current_turn_index: u8,
     current_river_index: u8,
     current_player_indexes: Vec<u8>,
@@ -91,7 +91,10 @@ impl FlopExhaustiveEvaluatorIterator {
             player_entries,
             current_deck: current_deck.try_into().unwrap(),
             current_board: evaluator.board.clone(),
-            current_used_cards: HashSet::with_capacity(2 + evaluator.players.len() * 2),
+            current_used_cards: HashSet::with_capacity_and_hasher(
+                2 + evaluator.players.len() * 2,
+                FxBuildHasher::default(),
+            ),
             current_turn_index: evaluator.turn_from,
             current_river_index: evaluator.river_from,
             current_player_indexes: vec![0; evaluator.players.len()],
