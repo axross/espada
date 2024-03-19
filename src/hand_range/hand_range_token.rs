@@ -1,7 +1,6 @@
-use regex::Regex;
-
 use super::{CardPair, RankPair};
 use crate::card::{Rank, RankRange};
+use regex::Regex;
 use std::fmt::{Display, Formatter};
 use std::str::FromStr;
 
@@ -31,29 +30,11 @@ impl Display for HandRangeToken {
             HandRangeTokenKind::BottomClosedRankPairRange(rank_pair) => {
                 write!(f, "{}+", rank_pair)
             }
-            HandRangeTokenKind::DoubleClosedRankPairRange(start, end) => {
-                match (start.is_pocket(), start.is_suited(), end) {
-                    (true, _, end) => {
-                        write!(f, "{}-{}", start, RankPair::pocket(end))
-                    }
-                    (false, true, end) => write!(
-                        f,
-                        "{}{}s-{}{}s",
-                        start.high(),
-                        start.kicker(),
-                        start.high(),
-                        end
-                    ),
-                    (false, false, end) => write!(
-                        f,
-                        "{}{}o-{}{}o",
-                        start.high(),
-                        start.kicker(),
-                        start.high(),
-                        end
-                    ),
-                }
-            }
+            HandRangeTokenKind::DoubleClosedRankPairRange(start, end) => match start {
+                RankPair::Pocket(_) => write!(f, "{}-{}", start, RankPair::Pocket(end)),
+                RankPair::Suited(high, kicker) => write!(f, "{}{}s-{}{}s", high, kicker, high, end),
+                RankPair::Ofsuit(high, kicker) => write!(f, "{}{}o-{}{}o", high, kicker, high, end),
+            },
             HandRangeTokenKind::SingleRankPair(rank_pair) => rank_pair.fmt(f),
             HandRangeTokenKind::SingleCardPair(card_pair) => card_pair.fmt(f),
         };
@@ -73,60 +54,68 @@ impl IntoIterator for HandRangeToken {
 
     fn into_iter(self) -> Self::IntoIter {
         match self.kind {
-            HandRangeTokenKind::BottomClosedRankPairRange(rank_pair) => {
-                if rank_pair.is_pocket() {
-                    RankRange::inclusive(Rank::Ace, rank_pair.high())
+            HandRangeTokenKind::BottomClosedRankPairRange(rank_pair) => match rank_pair {
+                RankPair::Pocket(rank) => RankRange::inclusive(Rank::Ace, rank)
+                    .into_iter()
+                    .flat_map(|r| {
+                        RankPair::Pocket(r)
+                            .into_iter()
+                            .map(|cp| (cp, self.probability))
+                    })
+                    .collect::<Vec<(CardPair, f32)>>()
+                    .into_iter(),
+                RankPair::Suited(high, kicker) => {
+                    RankRange::inclusive(high.next().unwrap(), kicker)
                         .into_iter()
                         .flat_map(|r| {
-                            RankPair::pocket(r)
+                            RankPair::Suited(high, r)
                                 .into_iter()
                                 .map(|cp| (cp, self.probability))
                         })
                         .collect::<Vec<(CardPair, f32)>>()
                         .into_iter()
-                } else {
-                    RankRange::inclusive(rank_pair.high().next().unwrap(), rank_pair.kicker())
-                        .into_iter()
-                        .flat_map(|r| {
-                            let rank_pair = if rank_pair.is_suited() {
-                                RankPair::suited(rank_pair.high(), r)
-                            } else {
-                                RankPair::ofsuit(rank_pair.high(), r)
-                            };
-
-                            rank_pair.into_iter().map(|cp| (cp, self.probability))
-                        })
-                        .collect::<Vec<(CardPair, f32)>>()
-                        .into_iter()
                 }
-            }
-            HandRangeTokenKind::DoubleClosedRankPairRange(rank_pair, end) => {
-                if rank_pair.is_pocket() {
-                    RankRange::inclusive(rank_pair.high(), end)
+                RankPair::Ofsuit(high, kicker) => {
+                    RankRange::inclusive(high.next().unwrap(), kicker)
                         .into_iter()
                         .flat_map(|r| {
-                            RankPair::pocket(r)
+                            RankPair::Ofsuit(high, r)
                                 .into_iter()
                                 .map(|cp| (cp, self.probability))
                         })
                         .collect::<Vec<(CardPair, f32)>>()
                         .into_iter()
-                } else {
-                    RankRange::inclusive(rank_pair.kicker(), end)
-                        .into_iter()
-                        .flat_map(|r| {
-                            let rank_pair = if rank_pair.is_suited() {
-                                RankPair::suited(rank_pair.high(), r)
-                            } else {
-                                RankPair::ofsuit(rank_pair.high(), r)
-                            };
-
-                            rank_pair.into_iter().map(|cp| (cp, self.probability))
-                        })
-                        .collect::<Vec<(CardPair, f32)>>()
-                        .into_iter()
                 }
-            }
+            },
+            HandRangeTokenKind::DoubleClosedRankPairRange(rank_pair, end) => match rank_pair {
+                RankPair::Pocket(rank) => RankRange::inclusive(rank, end)
+                    .into_iter()
+                    .flat_map(|r| {
+                        RankPair::Pocket(r)
+                            .into_iter()
+                            .map(|cp| (cp, self.probability))
+                    })
+                    .collect::<Vec<(CardPair, f32)>>()
+                    .into_iter(),
+                RankPair::Suited(high, kicker) => RankRange::inclusive(kicker, end)
+                    .into_iter()
+                    .flat_map(|r| {
+                        RankPair::Suited(high, r)
+                            .into_iter()
+                            .map(|cp| (cp, self.probability))
+                    })
+                    .collect::<Vec<(CardPair, f32)>>()
+                    .into_iter(),
+                RankPair::Ofsuit(high, kicker) => RankRange::inclusive(kicker, end)
+                    .into_iter()
+                    .flat_map(|r| {
+                        RankPair::Ofsuit(high, r)
+                            .into_iter()
+                            .map(|cp| (cp, self.probability))
+                    })
+                    .collect::<Vec<(CardPair, f32)>>()
+                    .into_iter(),
+            },
             HandRangeTokenKind::SingleRankPair(rank_pair) => rank_pair
                 .into_iter()
                 .map(|cp| (cp, self.probability))
@@ -167,7 +156,7 @@ impl FromStr for HandRangeToken {
         {
             if let (Ok(top), Ok(bottom)) = (Rank::from_str(&s[0..1]), Rank::from_str(&s[3..4])) {
                 return Ok(HandRangeToken::new(
-                    HandRangeTokenKind::DoubleClosedRankPairRange(RankPair::pocket(top), bottom),
+                    HandRangeTokenKind::DoubleClosedRankPairRange(RankPair::Pocket(top), bottom),
                     parse_probability(&s[5..]),
                 ));
             }
@@ -187,7 +176,7 @@ impl FromStr for HandRangeToken {
                     if &s[2..3] == "s" {
                         return Ok(HandRangeToken::new(
                             HandRangeTokenKind::DoubleClosedRankPairRange(
-                                RankPair::suited(high, kicker_top),
+                                RankPair::Suited(high, kicker_top),
                                 kicker_bottom,
                             ),
                             parse_probability(&s[7..]),
@@ -196,7 +185,7 @@ impl FromStr for HandRangeToken {
 
                     return Ok(HandRangeToken::new(
                         HandRangeTokenKind::DoubleClosedRankPairRange(
-                            RankPair::ofsuit(high, kicker_top),
+                            RankPair::Ofsuit(high, kicker_top),
                             kicker_bottom,
                         ),
                         parse_probability(&s[7..]),
@@ -208,7 +197,7 @@ impl FromStr for HandRangeToken {
         if bottom_closed_pocket_pair_range_regex.is_match(s) && s[0..1] == s[1..2] {
             if let Ok(bottom) = Rank::from_str(&s[0..1]) {
                 return Ok(HandRangeToken::new(
-                    HandRangeTokenKind::BottomClosedRankPairRange(RankPair::pocket(bottom)),
+                    HandRangeTokenKind::BottomClosedRankPairRange(RankPair::Pocket(bottom)),
                     parse_probability(&s[3..]),
                 ));
             }
@@ -220,7 +209,7 @@ impl FromStr for HandRangeToken {
             {
                 if &s[2..3] == "s" {
                     return Ok(HandRangeToken::new(
-                        HandRangeTokenKind::BottomClosedRankPairRange(RankPair::suited(
+                        HandRangeTokenKind::BottomClosedRankPairRange(RankPair::Suited(
                             high,
                             kicker_bottom,
                         )),
@@ -229,7 +218,7 @@ impl FromStr for HandRangeToken {
                 }
 
                 return Ok(HandRangeToken::new(
-                    HandRangeTokenKind::BottomClosedRankPairRange(RankPair::ofsuit(
+                    HandRangeTokenKind::BottomClosedRankPairRange(RankPair::Ofsuit(
                         high,
                         kicker_bottom,
                     )),
@@ -241,7 +230,7 @@ impl FromStr for HandRangeToken {
         if single_pocket_pair_regex.is_match(s) && s[0..1] == s[1..2] {
             if let Ok(rank) = Rank::from_str(&s[0..1]) {
                 return Ok(HandRangeToken::new(
-                    HandRangeTokenKind::SingleRankPair(RankPair::pocket(rank)),
+                    HandRangeTokenKind::SingleRankPair(RankPair::Pocket(rank)),
                     parse_probability(&s[2..]),
                 ));
             }
@@ -251,13 +240,13 @@ impl FromStr for HandRangeToken {
             if let (Ok(high), Ok(kicker)) = (Rank::from_str(&s[0..1]), Rank::from_str(&s[1..2])) {
                 if &s[2..3] == "s" {
                     return Ok(HandRangeToken::new(
-                        HandRangeTokenKind::SingleRankPair(RankPair::suited(high, kicker)),
+                        HandRangeTokenKind::SingleRankPair(RankPair::Suited(high, kicker)),
                         parse_probability(&s[3..]),
                     ));
                 }
 
                 return Ok(HandRangeToken::new(
-                    HandRangeTokenKind::SingleRankPair(RankPair::ofsuit(high, kicker)),
+                    HandRangeTokenKind::SingleRankPair(RankPair::Ofsuit(high, kicker)),
                     parse_probability(&s[3..]),
                 ));
             }
@@ -296,7 +285,7 @@ mod tests {
         #[test]
         fn it_formats_bottom_closed_pocket_pair_range_with_prob() {
             let token = HandRangeToken::new(
-                HandRangeTokenKind::BottomClosedRankPairRange(RankPair::pocket(Rank::Queen)),
+                HandRangeTokenKind::BottomClosedRankPairRange(RankPair::Pocket(Rank::Queen)),
                 0.8,
             );
 
@@ -306,7 +295,7 @@ mod tests {
         #[test]
         fn it_formats_bottom_closed_pocket_pair_range() {
             let token = HandRangeToken::new(
-                HandRangeTokenKind::BottomClosedRankPairRange(RankPair::pocket(Rank::Queen)),
+                HandRangeTokenKind::BottomClosedRankPairRange(RankPair::Pocket(Rank::Queen)),
                 1.0,
             );
 
@@ -316,7 +305,7 @@ mod tests {
         #[test]
         fn it_formats_bottom_closed_suited_rank_pair_range_with_prob() {
             let token = HandRangeToken::new(
-                HandRangeTokenKind::BottomClosedRankPairRange(RankPair::suited(
+                HandRangeTokenKind::BottomClosedRankPairRange(RankPair::Suited(
                     Rank::King,
                     Rank::Nine,
                 )),
@@ -329,7 +318,7 @@ mod tests {
         #[test]
         fn it_formats_bottom_closed_suited_rank_pair_range() {
             let token = HandRangeToken::new(
-                HandRangeTokenKind::BottomClosedRankPairRange(RankPair::suited(
+                HandRangeTokenKind::BottomClosedRankPairRange(RankPair::Suited(
                     Rank::King,
                     Rank::Nine,
                 )),
@@ -342,7 +331,7 @@ mod tests {
         #[test]
         fn it_formats_bottom_closed_ofsuit_rank_pair_range_with_prob() {
             let token = HandRangeToken::new(
-                HandRangeTokenKind::BottomClosedRankPairRange(RankPair::ofsuit(
+                HandRangeTokenKind::BottomClosedRankPairRange(RankPair::Ofsuit(
                     Rank::Eight,
                     Rank::Four,
                 )),
@@ -355,7 +344,7 @@ mod tests {
         #[test]
         fn it_formats_bottom_closed_ofsuit_rank_pair_range() {
             let token = HandRangeToken::new(
-                HandRangeTokenKind::BottomClosedRankPairRange(RankPair::ofsuit(
+                HandRangeTokenKind::BottomClosedRankPairRange(RankPair::Ofsuit(
                     Rank::Eight,
                     Rank::Four,
                 )),
@@ -369,7 +358,7 @@ mod tests {
         fn it_formats_double_closed_pocket_pair_range_with_prob() {
             let token = HandRangeToken::new(
                 HandRangeTokenKind::DoubleClosedRankPairRange(
-                    RankPair::pocket(Rank::Jack),
+                    RankPair::Pocket(Rank::Jack),
                     Rank::Seven,
                 ),
                 0.8,
@@ -382,7 +371,7 @@ mod tests {
         fn it_formats_double_closed_pocket_pair_range() {
             let token = HandRangeToken::new(
                 HandRangeTokenKind::DoubleClosedRankPairRange(
-                    RankPair::pocket(Rank::Jack),
+                    RankPair::Pocket(Rank::Jack),
                     Rank::Seven,
                 ),
                 1.0,
@@ -395,7 +384,7 @@ mod tests {
         fn it_formats_double_closed_suited_rank_pair_range_with_prob() {
             let token = HandRangeToken::new(
                 HandRangeTokenKind::DoubleClosedRankPairRange(
-                    RankPair::suited(Rank::King, Rank::Nine),
+                    RankPair::Suited(Rank::King, Rank::Nine),
                     Rank::Five,
                 ),
                 0.8,
@@ -408,7 +397,7 @@ mod tests {
         fn it_formats_double_closed_suited_rank_pair_range() {
             let token = HandRangeToken::new(
                 HandRangeTokenKind::DoubleClosedRankPairRange(
-                    RankPair::suited(Rank::King, Rank::Nine),
+                    RankPair::Suited(Rank::King, Rank::Nine),
                     Rank::Five,
                 ),
                 1.0,
@@ -421,7 +410,7 @@ mod tests {
         fn it_formats_double_closed_ofsuit_rank_pair_range_with_prob() {
             let token = HandRangeToken::new(
                 HandRangeTokenKind::DoubleClosedRankPairRange(
-                    RankPair::ofsuit(Rank::Nine, Rank::Seven),
+                    RankPair::Ofsuit(Rank::Nine, Rank::Seven),
                     Rank::Four,
                 ),
                 0.8,
@@ -434,7 +423,7 @@ mod tests {
         fn it_formats_double_closed_ofsuit_rank_pair_range() {
             let token = HandRangeToken::new(
                 HandRangeTokenKind::DoubleClosedRankPairRange(
-                    RankPair::ofsuit(Rank::Nine, Rank::Seven),
+                    RankPair::Ofsuit(Rank::Nine, Rank::Seven),
                     Rank::Four,
                 ),
                 1.0,
@@ -452,7 +441,7 @@ mod tests {
         #[test]
         fn it_iterates_bottom_closed_pocket_pair_range() {
             let token = HandRangeToken::new(
-                HandRangeTokenKind::BottomClosedRankPairRange(RankPair::pocket(Rank::Queen)),
+                HandRangeTokenKind::BottomClosedRankPairRange(RankPair::Pocket(Rank::Queen)),
                 0.9,
             );
 
@@ -464,7 +453,7 @@ mod tests {
         #[test]
         fn it_iterates_bottom_closed_suited_pair_range() {
             let token = HandRangeToken::new(
-                HandRangeTokenKind::BottomClosedRankPairRange(RankPair::suited(
+                HandRangeTokenKind::BottomClosedRankPairRange(RankPair::Suited(
                     Rank::Jack,
                     Rank::Eight,
                 )),
@@ -479,7 +468,7 @@ mod tests {
         #[test]
         fn it_iterates_bottom_closed_ofsuit_pair_range() {
             let token = HandRangeToken::new(
-                HandRangeTokenKind::BottomClosedRankPairRange(RankPair::ofsuit(
+                HandRangeTokenKind::BottomClosedRankPairRange(RankPair::Ofsuit(
                     Rank::Ace,
                     Rank::Ten,
                 )),
@@ -495,7 +484,7 @@ mod tests {
         fn it_iterates_double_closed_pocket_pair_range() {
             let token = HandRangeToken::new(
                 HandRangeTokenKind::DoubleClosedRankPairRange(
-                    RankPair::pocket(Rank::Queen),
+                    RankPair::Pocket(Rank::Queen),
                     Rank::Nine,
                 ),
                 0.8,
@@ -510,7 +499,7 @@ mod tests {
         fn it_iterates_double_closed_suited_pair_range() {
             let token = HandRangeToken::new(
                 HandRangeTokenKind::DoubleClosedRankPairRange(
-                    RankPair::suited(Rank::Jack, Rank::Nine),
+                    RankPair::Suited(Rank::Jack, Rank::Nine),
                     Rank::Six,
                 ),
                 0.6,
@@ -525,7 +514,7 @@ mod tests {
         fn it_iterates_double_closed_ofsuit_pair_range() {
             let token = HandRangeToken::new(
                 HandRangeTokenKind::DoubleClosedRankPairRange(
-                    RankPair::ofsuit(Rank::King, Rank::Nine),
+                    RankPair::Ofsuit(Rank::King, Rank::Nine),
                     Rank::Seven,
                 ),
                 0.6,
@@ -539,7 +528,7 @@ mod tests {
         #[test]
         fn it_iterates_single_pocket_pair_range() {
             let token = HandRangeToken::new(
-                HandRangeTokenKind::SingleRankPair(RankPair::pocket(Rank::Deuce)),
+                HandRangeTokenKind::SingleRankPair(RankPair::Pocket(Rank::Deuce)),
                 0.3,
             );
 
@@ -551,7 +540,7 @@ mod tests {
         #[test]
         fn it_iterates_single_suited_pair_range() {
             let token = HandRangeToken::new(
-                HandRangeTokenKind::SingleRankPair(RankPair::suited(Rank::King, Rank::Six)),
+                HandRangeTokenKind::SingleRankPair(RankPair::Suited(Rank::King, Rank::Six)),
                 0.1,
             );
 
@@ -563,7 +552,7 @@ mod tests {
         #[test]
         fn it_iterates_single_ofsuit_pair_range() {
             let token = HandRangeToken::new(
-                HandRangeTokenKind::SingleRankPair(RankPair::ofsuit(Rank::Ace, Rank::Five)),
+                HandRangeTokenKind::SingleRankPair(RankPair::Ofsuit(Rank::Ace, Rank::Five)),
                 0.4,
             );
 
@@ -598,7 +587,7 @@ mod tests {
                 "88-66".parse::<HandRangeToken>().unwrap(),
                 HandRangeToken::new(
                     HandRangeTokenKind::DoubleClosedRankPairRange(
-                        RankPair::pocket(Rank::Eight),
+                        RankPair::Pocket(Rank::Eight),
                         Rank::Six
                     ),
                     1.0
@@ -612,7 +601,7 @@ mod tests {
                 "88-66:0.66".parse::<HandRangeToken>().unwrap(),
                 HandRangeToken::new(
                     HandRangeTokenKind::DoubleClosedRankPairRange(
-                        RankPair::pocket(Rank::Eight),
+                        RankPair::Pocket(Rank::Eight),
                         Rank::Six
                     ),
                     0.66
@@ -625,7 +614,7 @@ mod tests {
             assert_eq!(
                 "JJ+".parse::<HandRangeToken>().unwrap(),
                 HandRangeToken::new(
-                    HandRangeTokenKind::BottomClosedRankPairRange(RankPair::pocket(Rank::Jack)),
+                    HandRangeTokenKind::BottomClosedRankPairRange(RankPair::Pocket(Rank::Jack)),
                     1.0
                 )
             );
@@ -636,7 +625,7 @@ mod tests {
             assert_eq!(
                 "JJ+:0.5".parse::<HandRangeToken>().unwrap(),
                 HandRangeToken::new(
-                    HandRangeTokenKind::BottomClosedRankPairRange(RankPair::pocket(Rank::Jack)),
+                    HandRangeTokenKind::BottomClosedRankPairRange(RankPair::Pocket(Rank::Jack)),
                     0.5
                 )
             );
@@ -648,7 +637,7 @@ mod tests {
                 "AQs-A9s".parse::<HandRangeToken>().unwrap(),
                 HandRangeToken::new(
                     HandRangeTokenKind::DoubleClosedRankPairRange(
-                        RankPair::suited(Rank::Ace, Rank::Queen),
+                        RankPair::Suited(Rank::Ace, Rank::Queen),
                         Rank::Nine
                     ),
                     1.0
@@ -662,7 +651,7 @@ mod tests {
                 "AQs-A9s:0.2".parse::<HandRangeToken>().unwrap(),
                 HandRangeToken::new(
                     HandRangeTokenKind::DoubleClosedRankPairRange(
-                        RankPair::suited(Rank::Ace, Rank::Queen),
+                        RankPair::Suited(Rank::Ace, Rank::Queen),
                         Rank::Nine
                     ),
                     0.2
@@ -676,7 +665,7 @@ mod tests {
                 "98o-96o".parse::<HandRangeToken>().unwrap(),
                 HandRangeToken::new(
                     HandRangeTokenKind::DoubleClosedRankPairRange(
-                        RankPair::ofsuit(Rank::Nine, Rank::Eight),
+                        RankPair::Ofsuit(Rank::Nine, Rank::Eight),
                         Rank::Six
                     ),
                     1.0
@@ -690,7 +679,7 @@ mod tests {
                 "98o-96o:0.999".parse::<HandRangeToken>().unwrap(),
                 HandRangeToken::new(
                     HandRangeTokenKind::DoubleClosedRankPairRange(
-                        RankPair::ofsuit(Rank::Nine, Rank::Eight),
+                        RankPair::Ofsuit(Rank::Nine, Rank::Eight),
                         Rank::Six
                     ),
                     0.999
@@ -703,7 +692,7 @@ mod tests {
             assert_eq!(
                 "K8s+".parse::<HandRangeToken>().unwrap(),
                 HandRangeToken::new(
-                    HandRangeTokenKind::BottomClosedRankPairRange(RankPair::suited(
+                    HandRangeTokenKind::BottomClosedRankPairRange(RankPair::Suited(
                         Rank::King,
                         Rank::Eight
                     )),
@@ -717,7 +706,7 @@ mod tests {
             assert_eq!(
                 "K8s+:0.80".parse::<HandRangeToken>().unwrap(),
                 HandRangeToken::new(
-                    HandRangeTokenKind::BottomClosedRankPairRange(RankPair::suited(
+                    HandRangeTokenKind::BottomClosedRankPairRange(RankPair::Suited(
                         Rank::King,
                         Rank::Eight
                     )),
@@ -731,7 +720,7 @@ mod tests {
             assert_eq!(
                 "ATo+".parse::<HandRangeToken>().unwrap(),
                 HandRangeToken::new(
-                    HandRangeTokenKind::BottomClosedRankPairRange(RankPair::ofsuit(
+                    HandRangeTokenKind::BottomClosedRankPairRange(RankPair::Ofsuit(
                         Rank::Ace,
                         Rank::Ten
                     )),
@@ -745,7 +734,7 @@ mod tests {
             assert_eq!(
                 "ATo+:1".parse::<HandRangeToken>().unwrap(),
                 HandRangeToken::new(
-                    HandRangeTokenKind::BottomClosedRankPairRange(RankPair::ofsuit(
+                    HandRangeTokenKind::BottomClosedRankPairRange(RankPair::Ofsuit(
                         Rank::Ace,
                         Rank::Ten
                     )),
@@ -759,7 +748,7 @@ mod tests {
             assert_eq!(
                 "44".parse::<HandRangeToken>().unwrap(),
                 HandRangeToken::new(
-                    HandRangeTokenKind::SingleRankPair(RankPair::pocket(Rank::Four)),
+                    HandRangeTokenKind::SingleRankPair(RankPair::Pocket(Rank::Four)),
                     1.0
                 )
             );
@@ -770,7 +759,7 @@ mod tests {
             assert_eq!(
                 "44:0.44".parse::<HandRangeToken>().unwrap(),
                 HandRangeToken::new(
-                    HandRangeTokenKind::SingleRankPair(RankPair::pocket(Rank::Four)),
+                    HandRangeTokenKind::SingleRankPair(RankPair::Pocket(Rank::Four)),
                     0.44
                 )
             );
@@ -781,7 +770,7 @@ mod tests {
             assert_eq!(
                 "JTs".parse::<HandRangeToken>().unwrap(),
                 HandRangeToken::new(
-                    HandRangeTokenKind::SingleRankPair(RankPair::suited(Rank::Jack, Rank::Ten)),
+                    HandRangeTokenKind::SingleRankPair(RankPair::Suited(Rank::Jack, Rank::Ten)),
                     1.0
                 )
             );
@@ -792,7 +781,7 @@ mod tests {
             assert_eq!(
                 "JTs:0.25".parse::<HandRangeToken>().unwrap(),
                 HandRangeToken::new(
-                    HandRangeTokenKind::SingleRankPair(RankPair::suited(Rank::Jack, Rank::Ten)),
+                    HandRangeTokenKind::SingleRankPair(RankPair::Suited(Rank::Jack, Rank::Ten)),
                     0.25
                 )
             );
@@ -803,7 +792,7 @@ mod tests {
             assert_eq!(
                 "72o".parse::<HandRangeToken>().unwrap(),
                 HandRangeToken::new(
-                    HandRangeTokenKind::SingleRankPair(RankPair::ofsuit(Rank::Seven, Rank::Deuce)),
+                    HandRangeTokenKind::SingleRankPair(RankPair::Ofsuit(Rank::Seven, Rank::Deuce)),
                     1.0
                 )
             );
@@ -814,7 +803,7 @@ mod tests {
             assert_eq!(
                 "72o:0.27".parse::<HandRangeToken>().unwrap(),
                 HandRangeToken::new(
-                    HandRangeTokenKind::SingleRankPair(RankPair::ofsuit(Rank::Seven, Rank::Deuce)),
+                    HandRangeTokenKind::SingleRankPair(RankPair::Ofsuit(Rank::Seven, Rank::Deuce)),
                     0.27
                 )
             );
