@@ -1,16 +1,19 @@
 use criterion::{criterion_group, criterion_main, Criterion};
-use espada::card::Card;
+use espada::card::{Card, Rank, Suit};
 use espada::evaluator::FlopExhaustiveEvaluator;
 use std::collections::HashMap;
 
 fn evaluate() {
-    let board: Vec<Card> = ["Ks", "8d", "2h"]
-        .into_iter()
-        .map(|s| s.parse().unwrap())
-        .collect();
+    let board = [
+        Some(Card::new(Rank::King, Suit::Spade)),
+        Some(Card::new(Rank::Eight, Suit::Diamond)),
+        Some(Card::new(Rank::Deuce, Suit::Heart)),
+        None,
+        None,
+    ];
     let players = vec!["TT+".parse().unwrap(), "A8s+".parse().unwrap()];
 
-    let evaluator = FlopExhaustiveEvaluator::new(board, &players);
+    let evaluator = FlopExhaustiveEvaluator::new(&board, &players);
     let mut player_results = vec![HashMap::new(); players.len()];
 
     for (player_index, player) in players.iter().enumerate() {

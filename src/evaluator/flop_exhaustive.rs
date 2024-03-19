@@ -4,36 +4,20 @@ use super::showdown::Showdown;
 use crate::card::{Card, RankRange, SuitRange};
 use crate::hand_range::{CardPair, HandRange};
 
-pub struct FlopExhaustiveEvaluator<'p> {
-    board: Vec<Card>,
-    players: &'p Vec<HandRange>,
+pub struct FlopExhaustiveEvaluator {
+    board: [Option<Card>; 5],
+    players: Vec<HandRange>,
     turn_from: u8,
     river_from: u8,
     turn_to: u8,
     river_to: u8,
 }
 
-impl<'p> FlopExhaustiveEvaluator<'p> {
-    pub fn new(
-        original_board: impl IntoIterator<Item = Card>,
-        players: &'p Vec<HandRange>,
-    ) -> Self {
-        let mut board: Vec<Card> = Vec::with_capacity(7);
-        let mut len = 0;
-
-        for card in original_board {
-            len += 1;
-
-            if len > 5 {
-                panic!("board length must be less than or equal to 5.");
-            }
-
-            board.push(card);
-        }
-
+impl FlopExhaustiveEvaluator {
+    pub fn new(board: &[Option<Card>; 5], players: &Vec<HandRange>) -> Self {
         Self {
-            board,
-            players,
+            board: board.clone(),
+            players: players.clone(),
             turn_from: 0,
             river_from: 1,
             turn_to: 48,
@@ -53,7 +37,7 @@ impl<'p> FlopExhaustiveEvaluator<'p> {
     }
 }
 
-impl<'p> IntoIterator for FlopExhaustiveEvaluator<'p> {
+impl<'p> IntoIterator for FlopExhaustiveEvaluator {
     type Item = Showdown;
     type IntoIter = FlopExhaustiveEvaluatorIterator;
 
@@ -90,16 +74,15 @@ impl FlopExhaustiveEvaluatorIterator {
             for suit in SuitRange::all() {
                 let card = Card::new(rank, suit);
 
-                if evaluator.board.iter().all(|c| *c != card) {
+                if evaluator
+                    .board
+                    .iter()
+                    .filter(|c| c.is_some())
+                    .all(|c| (*c).unwrap() != card)
+                {
                     current_deck.push(card);
                 }
             }
-        }
-
-        let mut current_board = [None; 5];
-
-        for (i, card) in evaluator.board.iter().enumerate() {
-            current_board[i] = Some(*card);
         }
 
         Self {
@@ -107,7 +90,7 @@ impl FlopExhaustiveEvaluatorIterator {
             river_to: evaluator.river_to,
             player_entries,
             current_deck: current_deck.try_into().unwrap(),
-            current_board,
+            current_board: evaluator.board.clone(),
             current_used_cards: HashSet::with_capacity(2 + evaluator.players.len() * 2),
             current_turn_index: evaluator.turn_from,
             current_river_index: evaluator.river_from,
@@ -215,21 +198,25 @@ mod tests {
 
     mod iterator {
         use super::*;
+        use crate::card::{Rank, Suit};
         use insta::*;
         use std::str::FromStr;
 
         #[test]
         fn it_iterates_scoped_from_0_1_to_2_25() {
-            let board = ["2h", "2d", "2c"]
-                .into_iter()
-                .map(|s| s.parse().unwrap())
-                .collect::<Vec<Card>>();
+            let board = [
+                Some(Card::new(Rank::Deuce, Suit::Heart)),
+                Some(Card::new(Rank::Deuce, Suit::Diamond)),
+                Some(Card::new(Rank::Deuce, Suit::Club)),
+                None,
+                None,
+            ];
             let players = vec![
                 HandRange::from_str("4s3h:1").unwrap(),
                 HandRange::from_str("4d3c:1").unwrap(),
             ];
 
-            let mut evaluator = FlopExhaustiveEvaluator::new(board, &players);
+            let mut evaluator = FlopExhaustiveEvaluator::new(&board, &players);
             evaluator.scope(0, 1, 2, 25);
 
             let result: Vec<Showdown> = evaluator.into_iter().collect();
@@ -240,16 +227,19 @@ mod tests {
 
         #[test]
         fn it_iterates_scoped_from_10_43_to_14_18() {
-            let board = ["Jh", "9d", "3c"]
-                .into_iter()
-                .map(|s| s.parse().unwrap())
-                .collect::<Vec<Card>>();
+            let board = [
+                Some(Card::new(Rank::Jack, Suit::Heart)),
+                Some(Card::new(Rank::Nine, Suit::Diamond)),
+                Some(Card::new(Rank::Trey, Suit::Club)),
+                None,
+                None,
+            ];
             let players = vec![
                 HandRange::from_str("As4h:1").unwrap(),
                 HandRange::from_str("Td8c:1").unwrap(),
             ];
 
-            let mut evaluator = FlopExhaustiveEvaluator::new(board, &players);
+            let mut evaluator = FlopExhaustiveEvaluator::new(&board, &players);
             evaluator.scope(10, 43, 14, 18);
 
             let result: Vec<Showdown> = evaluator.into_iter().collect();
@@ -260,16 +250,19 @@ mod tests {
 
         #[test]
         fn it_iterates_scoped_from_32_48_to_47_49() {
-            let board = ["Kh", "Kd", "Kc"]
-                .into_iter()
-                .map(|s| s.parse().unwrap())
-                .collect::<Vec<Card>>();
+            let board = [
+                Some(Card::new(Rank::King, Suit::Heart)),
+                Some(Card::new(Rank::King, Suit::Diamond)),
+                Some(Card::new(Rank::King, Suit::Club)),
+                None,
+                None,
+            ];
             let players = vec![
                 HandRange::from_str("As2s:1").unwrap(),
                 HandRange::from_str("JdJc:1").unwrap(),
             ];
 
-            let mut evaluator = FlopExhaustiveEvaluator::new(board, &players);
+            let mut evaluator = FlopExhaustiveEvaluator::new(&board, &players);
             evaluator.scope(32, 48, 47, 49);
 
             let result: Vec<Showdown> = evaluator.into_iter().collect();

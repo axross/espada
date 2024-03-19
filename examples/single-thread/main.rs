@@ -4,12 +4,12 @@ use std::collections::HashMap;
 fn main() {
     let args: Vec<String> = std::env::args().collect();
 
-    let mut board: Vec<Card> = vec![];
+    let mut board = [None; 5];
 
     for i in 0..args[1].len() / 2 {
         let card: Card = args[1][i * 2..i * 2 + 2].parse().unwrap();
 
-        board.push(card);
+        board[i] = Some(card);
     }
 
     let mut players = vec![];
@@ -39,7 +39,7 @@ fn main() {
 
     println!("space: {} patterns", space);
 
-    let evaluator = FlopExhaustiveEvaluator::new(board, &players);
+    let evaluator = FlopExhaustiveEvaluator::new(&board, &players);
 
     let instant = std::time::Instant::now();
 

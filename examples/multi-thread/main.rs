@@ -9,12 +9,12 @@ use std::collections::HashMap;
 fn main() {
     let args: Vec<String> = std::env::args().collect();
 
-    let mut board: Vec<Card> = vec![];
+    let mut board = [None; 5];
 
     for i in 0..args[1].len() / 2 {
         let card: Card = args[1][i * 2..i * 2 + 2].parse().unwrap();
 
-        board.push(card);
+        board[i] = Some(card);
     }
 
     let mut players = vec![];
@@ -46,7 +46,7 @@ fn main() {
     let mut handles = vec![];
 
     for scope in scopes {
-        let board: Vec<Card> = board_arc.clone().iter().map(|c| *c).collect();
+        let board = board_arc.clone();
         let players = players_arc.clone();
 
         let handle = std::thread::spawn(move || {
@@ -59,7 +59,7 @@ fn main() {
                 }
             }
 
-            let mut evaluator = FlopExhaustiveEvaluator::new(board, &players);
+            let mut evaluator = FlopExhaustiveEvaluator::new(&board, &players);
             evaluator.scope(
                 scope.turn_from,
                 scope.river_from,
