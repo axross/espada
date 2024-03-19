@@ -1,23 +1,17 @@
 use crate::card::Card;
-use std::fmt::{Display, Formatter};
+use std::fmt::{Debug, Display, Formatter};
 use std::ops::Index;
 use std::str::FromStr;
 
-#[derive(Debug, PartialEq, Eq, Hash, Clone, Copy)]
-pub struct CardPair {
-    left: Card,
-    right: Card,
-}
+#[derive(PartialEq, Eq, Hash, Clone, Copy)]
+pub struct CardPair(Card, Card);
 
 impl CardPair {
     pub fn new(left: Card, right: Card) -> CardPair {
         if left > right {
-            CardPair {
-                left: right,
-                right: left,
-            }
+            CardPair(right, left)
         } else {
-            CardPair { left, right }
+            CardPair(left, right)
         }
     }
 }
@@ -27,8 +21,8 @@ impl Index<usize> for CardPair {
 
     fn index(&self, index: usize) -> &Self::Output {
         match index {
-            0 => &self.left,
-            1 => &self.right,
+            0 => &self.0,
+            1 => &self.1,
             _ => panic!("index out of range."),
         }
     }
@@ -36,7 +30,13 @@ impl Index<usize> for CardPair {
 
 impl Display for CardPair {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}{}", self.left, self.right)
+        write!(f, "{}{}", self.0, self.1)
+    }
+}
+
+impl Debug for CardPair {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "CardPair({}{})", self.0, self.1)
     }
 }
 

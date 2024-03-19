@@ -1,0 +1,10 @@
+---
+source: src/hand_range/hand_range_token.rs
+expression: tokens
+---
+[
+    (
+        CardPair(5c2d),
+        0.2,
+    ),
+]

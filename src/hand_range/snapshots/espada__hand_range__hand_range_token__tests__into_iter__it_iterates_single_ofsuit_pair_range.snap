@@ -1,0 +1,54 @@
+---
+source: src/hand_range/hand_range_token.rs
+expression: tokens
+---
+[
+    (
+        CardPair(As5h),
+        0.4,
+    ),
+    (
+        CardPair(As5d),
+        0.4,
+    ),
+    (
+        CardPair(As5c),
+        0.4,
+    ),
+    (
+        CardPair(Ah5s),
+        0.4,
+    ),
+    (
+        CardPair(Ah5d),
+        0.4,
+    ),
+    (
+        CardPair(Ah5c),
+        0.4,
+    ),
+    (
+        CardPair(Ad5s),
+        0.4,
+    ),
+    (
+        CardPair(Ad5h),
+        0.4,
+    ),
+    (
+        CardPair(Ad5c),
+        0.4,
+    ),
+    (
+        CardPair(Ac5s),
+        0.4,
+    ),
+    (
+        CardPair(Ac5h),
+        0.4,
+    ),
+    (
+        CardPair(Ac5d),
+        0.4,
+    ),
+]

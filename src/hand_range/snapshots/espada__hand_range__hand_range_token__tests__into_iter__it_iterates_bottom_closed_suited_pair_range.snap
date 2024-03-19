@@ -1,0 +1,54 @@
+---
+source: src/hand_range/hand_range_token.rs
+expression: tokens
+---
+[
+    (
+        CardPair(JsTs),
+        0.7,
+    ),
+    (
+        CardPair(JhTh),
+        0.7,
+    ),
+    (
+        CardPair(JdTd),
+        0.7,
+    ),
+    (
+        CardPair(JcTc),
+        0.7,
+    ),
+    (
+        CardPair(Js9s),
+        0.7,
+    ),
+    (
+        CardPair(Jh9h),
+        0.7,
+    ),
+    (
+        CardPair(Jd9d),
+        0.7,
+    ),
+    (
+        CardPair(Jc9c),
+        0.7,
+    ),
+    (
+        CardPair(Js8s),
+        0.7,
+    ),
+    (
+        CardPair(Jh8h),
+        0.7,
+    ),
+    (
+        CardPair(Jd8d),
+        0.7,
+    ),
+    (
+        CardPair(Jc8c),
+        0.7,
+    ),
+]

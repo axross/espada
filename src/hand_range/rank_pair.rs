@@ -1,3 +1,5 @@
+use std::fmt::Display;
+
 use crate::card::{Card, Rank, Suit};
 use crate::hand_range::CardPair;
 
@@ -5,7 +7,7 @@ use crate::hand_range::CardPair;
 pub struct RankPair {
     high: Rank,
     kicker: Rank,
-    suited: bool,
+    is_suited: bool,
 }
 
 impl RankPair {
@@ -13,7 +15,7 @@ impl RankPair {
         RankPair {
             high: rank,
             kicker: rank,
-            suited: false,
+            is_suited: false,
         }
     }
 
@@ -28,7 +30,7 @@ impl RankPair {
         RankPair {
             high: high,
             kicker: kicker,
-            suited: true,
+            is_suited: true,
         }
     }
 
@@ -43,7 +45,35 @@ impl RankPair {
         RankPair {
             high: high,
             kicker: kicker,
-            suited: false,
+            is_suited: false,
+        }
+    }
+
+    pub fn high(&self) -> Rank {
+        self.high
+    }
+
+    pub fn kicker(&self) -> Rank {
+        self.kicker
+    }
+
+    pub fn is_suited(&self) -> bool {
+        self.is_suited
+    }
+
+    pub fn is_pocket(&self) -> bool {
+        self.high == self.kicker
+    }
+}
+
+impl Display for RankPair {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        if self.is_pocket() {
+            write!(f, "{}{}", self.high, self.kicker)
+        } else if self.is_suited() {
+            write!(f, "{}{}s", self.high, self.kicker)
+        } else {
+            write!(f, "{}{}o", self.high, self.kicker)
         }
     }
 }
@@ -53,7 +83,7 @@ impl IntoIterator for RankPair {
     type IntoIter = std::vec::IntoIter<Self::Item>;
 
     fn into_iter(self) -> Self::IntoIter {
-        match (self.high == self.kicker, self.suited) {
+        match (self.high == self.kicker, self.is_suited) {
             (true, false) => vec![
                 CardPair::new(
                     Card::new(self.high, Suit::Spade),

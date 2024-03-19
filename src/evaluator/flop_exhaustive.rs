@@ -214,9 +214,8 @@ mod tests {
     use super::*;
 
     mod iterator {
-        use insta::assert_debug_snapshot;
-
         use super::*;
+        use insta::*;
         use std::str::FromStr;
 
         #[test]

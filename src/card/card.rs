@@ -2,8 +2,9 @@ use super::{Rank, Suit};
 use core::fmt::Display;
 use core::fmt::Formatter;
 use core::str::FromStr;
+use std::fmt::Debug;
 
-#[derive(Debug, PartialEq, Eq, Hash, PartialOrd, Ord, Clone, Copy)]
+#[derive(PartialEq, Eq, Hash, PartialOrd, Ord, Clone, Copy)]
 pub struct Card(Rank, Suit);
 
 impl Card {
@@ -20,70 +21,15 @@ impl Card {
     }
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_turns_into_rank() {
-        assert_eq!(Card::new(Rank::Ace, Suit::Spade).rank(), &Rank::Ace);
-        assert_eq!(Card::new(Rank::King, Suit::Heart).rank(), &Rank::King);
-        assert_eq!(Card::new(Rank::Queen, Suit::Diamond).rank(), &Rank::Queen);
-        assert_eq!(Card::new(Rank::Jack, Suit::Club).rank(), &Rank::Jack);
-        assert_eq!(Card::new(Rank::Ten, Suit::Spade).rank(), &Rank::Ten);
-        assert_eq!(Card::new(Rank::Nine, Suit::Heart).rank(), &Rank::Nine);
-        assert_eq!(Card::new(Rank::Eight, Suit::Diamond).rank(), &Rank::Eight);
-        assert_eq!(Card::new(Rank::Seven, Suit::Club).rank(), &Rank::Seven);
-        assert_eq!(Card::new(Rank::Six, Suit::Spade).rank(), &Rank::Six);
-        assert_eq!(Card::new(Rank::Five, Suit::Heart).rank(), &Rank::Five);
-        assert_eq!(Card::new(Rank::Four, Suit::Diamond).rank(), &Rank::Four);
-        assert_eq!(Card::new(Rank::Trey, Suit::Club).rank(), &Rank::Trey);
-        assert_eq!(Card::new(Rank::Deuce, Suit::Spade).rank(), &Rank::Deuce);
-    }
-
-    #[test]
-    fn it_turns_into_suit() {
-        assert_eq!(Card::new(Rank::Ace, Suit::Spade).suit(), &Suit::Spade);
-        assert_eq!(Card::new(Rank::King, Suit::Heart).suit(), &Suit::Heart);
-        assert_eq!(Card::new(Rank::Queen, Suit::Diamond).suit(), &Suit::Diamond);
-        assert_eq!(Card::new(Rank::Jack, Suit::Club).suit(), &Suit::Club);
-        assert_eq!(Card::new(Rank::Ten, Suit::Spade).suit(), &Suit::Spade);
-        assert_eq!(Card::new(Rank::Nine, Suit::Heart).suit(), &Suit::Heart);
-        assert_eq!(Card::new(Rank::Eight, Suit::Diamond).suit(), &Suit::Diamond);
-        assert_eq!(Card::new(Rank::Seven, Suit::Club).suit(), &Suit::Club);
-        assert_eq!(Card::new(Rank::Six, Suit::Spade).suit(), &Suit::Spade);
-        assert_eq!(Card::new(Rank::Five, Suit::Heart).suit(), &Suit::Heart);
-        assert_eq!(Card::new(Rank::Four, Suit::Diamond).suit(), &Suit::Diamond);
-        assert_eq!(Card::new(Rank::Trey, Suit::Club).suit(), &Suit::Club);
-        assert_eq!(Card::new(Rank::Deuce, Suit::Spade).suit(), &Suit::Spade);
-    }
-}
-
 impl Display for Card {
     fn fmt(&self, f: &mut Formatter) -> core::fmt::Result {
-        write!(f, "{}{}", self.0, self.1)
+        write!(f, "{}{}", self.rank(), self.suit())
     }
 }
 
-#[cfg(test)]
-mod tests_display {
-    use super::*;
-
-    #[test]
-    fn it_turns_into_str() {
-        assert_eq!(Card::new(Rank::Ace, Suit::Spade).to_string(), "As");
-        assert_eq!(Card::new(Rank::King, Suit::Heart).to_string(), "Kh");
-        assert_eq!(Card::new(Rank::Queen, Suit::Diamond).to_string(), "Qd");
-        assert_eq!(Card::new(Rank::Jack, Suit::Club).to_string(), "Jc");
-        assert_eq!(Card::new(Rank::Ten, Suit::Spade).to_string(), "Ts");
-        assert_eq!(Card::new(Rank::Nine, Suit::Heart).to_string(), "9h");
-        assert_eq!(Card::new(Rank::Eight, Suit::Diamond).to_string(), "8d");
-        assert_eq!(Card::new(Rank::Seven, Suit::Club).to_string(), "7c");
-        assert_eq!(Card::new(Rank::Six, Suit::Spade).to_string(), "6s");
-        assert_eq!(Card::new(Rank::Five, Suit::Heart).to_string(), "5h");
-        assert_eq!(Card::new(Rank::Four, Suit::Diamond).to_string(), "4d");
-        assert_eq!(Card::new(Rank::Trey, Suit::Club).to_string(), "3c");
-        assert_eq!(Card::new(Rank::Deuce, Suit::Spade).to_string(), "2s");
+impl Debug for Card {
+    fn fmt(&self, f: &mut Formatter) -> core::fmt::Result {
+        write!(f, "Card({}{})", self.rank(), self.suit())
     }
 }
 
@@ -160,67 +106,6 @@ impl From<u64> for Card {
     }
 }
 
-#[cfg(test)]
-mod tests_card_from_u64 {
-    use super::*;
-
-    #[test]
-    fn it_turns_into_u64() {
-        assert_eq!(
-            Card::from(0b0000000000000000000000000000000000000000000000000001),
-            Card::new(Rank::Ace, Suit::Spade)
-        );
-        assert_eq!(
-            Card::from(0b0000000000000000000000000000000000000000000000100000),
-            Card::new(Rank::King, Suit::Heart)
-        );
-        assert_eq!(
-            Card::from(0b0000000000000000000000000000000000000000010000000000),
-            Card::new(Rank::Queen, Suit::Diamond)
-        );
-        assert_eq!(
-            Card::from(0b0000000000000000000000000000000000001000000000000000),
-            Card::new(Rank::Jack, Suit::Club)
-        );
-        assert_eq!(
-            Card::from(0b0000000000000000000000000000000000010000000000000000),
-            Card::new(Rank::Ten, Suit::Spade)
-        );
-        assert_eq!(
-            Card::from(0b0000000000000000000000000000001000000000000000000000),
-            Card::new(Rank::Nine, Suit::Heart)
-        );
-        assert_eq!(
-            Card::from(0b0000000000000000000000000100000000000000000000000000),
-            Card::new(Rank::Eight, Suit::Diamond)
-        );
-        assert_eq!(
-            Card::from(0b0000000000000000000010000000000000000000000000000000),
-            Card::new(Rank::Seven, Suit::Club)
-        );
-        assert_eq!(
-            Card::from(0b0000000000000000000100000000000000000000000000000000),
-            Card::new(Rank::Six, Suit::Spade)
-        );
-        assert_eq!(
-            Card::from(0b0000000000000010000000000000000000000000000000000000),
-            Card::new(Rank::Five, Suit::Heart)
-        );
-        assert_eq!(
-            Card::from(0b0000000001000000000000000000000000000000000000000000),
-            Card::new(Rank::Four, Suit::Diamond)
-        );
-        assert_eq!(
-            Card::from(0b0000100000000000000000000000000000000000000000000000),
-            Card::new(Rank::Trey, Suit::Club)
-        );
-        assert_eq!(
-            Card::from(0b0001000000000000000000000000000000000000000000000000),
-            Card::new(Rank::Deuce, Suit::Spade)
-        );
-    }
-}
-
 impl FromStr for Card {
     type Err = ParseCardError;
 
@@ -232,67 +117,6 @@ impl FromStr for Card {
         };
 
         Err(ParseCardError(v.to_string()))
-    }
-}
-
-#[cfg(test)]
-mod tests_card_from_str {
-    use super::*;
-
-    #[test]
-    fn it_turns_into_card() {
-        assert_eq!(
-            Card::from_str("As").unwrap(),
-            Card::new(Rank::Ace, Suit::Spade)
-        );
-        assert_eq!(
-            Card::from_str("Kh").unwrap(),
-            Card::new(Rank::King, Suit::Heart)
-        );
-        assert_eq!(
-            Card::from_str("Qd").unwrap(),
-            Card::new(Rank::Queen, Suit::Diamond)
-        );
-        assert_eq!(
-            Card::from_str("Jc").unwrap(),
-            Card::new(Rank::Jack, Suit::Club)
-        );
-        assert_eq!(
-            Card::from_str("Ts").unwrap(),
-            Card::new(Rank::Ten, Suit::Spade)
-        );
-        assert_eq!(
-            Card::from_str("9h").unwrap(),
-            Card::new(Rank::Nine, Suit::Heart)
-        );
-        assert_eq!(
-            Card::from_str("8d").unwrap(),
-            Card::new(Rank::Eight, Suit::Diamond)
-        );
-        assert_eq!(
-            Card::from_str("7c").unwrap(),
-            Card::new(Rank::Seven, Suit::Club)
-        );
-        assert_eq!(
-            Card::from_str("6s").unwrap(),
-            Card::new(Rank::Six, Suit::Spade)
-        );
-        assert_eq!(
-            Card::from_str("5h").unwrap(),
-            Card::new(Rank::Five, Suit::Heart)
-        );
-        assert_eq!(
-            Card::from_str("4d").unwrap(),
-            Card::new(Rank::Four, Suit::Diamond)
-        );
-        assert_eq!(
-            Card::from_str("3c").unwrap(),
-            Card::new(Rank::Trey, Suit::Club)
-        );
-        assert_eq!(
-            Card::from_str("2s").unwrap(),
-            Card::new(Rank::Deuce, Suit::Spade)
-        );
     }
 }
 
@@ -341,62 +165,495 @@ impl From<Card> for u64 {
 }
 
 #[cfg(test)]
-mod tests_u64_from_card {
+mod tests {
     use super::*;
 
-    #[test]
-    fn it_turns_into_u64() {
-        assert_eq!(
-            u64::from(Card::new(Rank::Ace, Suit::Spade)),
-            0b0000000000000000000000000000000000000000000000000001
-        );
-        assert_eq!(
-            u64::from(Card::new(Rank::King, Suit::Heart)),
-            0b0000000000000000000000000000000000000000000000100000
-        );
-        assert_eq!(
-            u64::from(Card::new(Rank::Queen, Suit::Diamond)),
-            0b0000000000000000000000000000000000000000010000000000
-        );
-        assert_eq!(
-            u64::from(Card::new(Rank::Jack, Suit::Club)),
-            0b0000000000000000000000000000000000001000000000000000
-        );
-        assert_eq!(
-            u64::from(Card::new(Rank::Ten, Suit::Spade)),
-            0b0000000000000000000000000000000000010000000000000000
-        );
-        assert_eq!(
-            u64::from(Card::new(Rank::Nine, Suit::Heart)),
-            0b0000000000000000000000000000001000000000000000000000
-        );
-        assert_eq!(
-            u64::from(Card::new(Rank::Eight, Suit::Diamond)),
-            0b0000000000000000000000000100000000000000000000000000
-        );
-        assert_eq!(
-            u64::from(Card::new(Rank::Seven, Suit::Club)),
-            0b0000000000000000000010000000000000000000000000000000
-        );
-        assert_eq!(
-            u64::from(Card::new(Rank::Six, Suit::Spade)),
-            0b0000000000000000000100000000000000000000000000000000
-        );
-        assert_eq!(
-            u64::from(Card::new(Rank::Five, Suit::Heart)),
-            0b0000000000000010000000000000000000000000000000000000
-        );
-        assert_eq!(
-            u64::from(Card::new(Rank::Four, Suit::Diamond)),
-            0b0000000001000000000000000000000000000000000000000000
-        );
-        assert_eq!(
-            u64::from(Card::new(Rank::Trey, Suit::Club)),
-            0b0000100000000000000000000000000000000000000000000000
-        );
-        assert_eq!(
-            u64::from(Card::new(Rank::Deuce, Suit::Spade)),
-            0b0001000000000000000000000000000000000000000000000000
-        );
+    mod rank {
+        use super::*;
+
+        #[test]
+        fn it_returns_ace() {
+            assert_eq!(Card::new(Rank::Ace, Suit::Spade).rank(), &Rank::Ace);
+        }
+
+        #[test]
+        fn it_returns_king() {
+            assert_eq!(Card::new(Rank::King, Suit::Heart).rank(), &Rank::King);
+        }
+
+        #[test]
+        fn it_returns_queen() {
+            assert_eq!(Card::new(Rank::Queen, Suit::Diamond).rank(), &Rank::Queen);
+        }
+
+        #[test]
+        fn it_returns_jack() {
+            assert_eq!(Card::new(Rank::Jack, Suit::Club).rank(), &Rank::Jack);
+        }
+
+        #[test]
+        fn it_returns_ten() {
+            assert_eq!(Card::new(Rank::Ten, Suit::Spade).rank(), &Rank::Ten);
+        }
+
+        #[test]
+        fn it_returns_nine() {
+            assert_eq!(Card::new(Rank::Nine, Suit::Heart).rank(), &Rank::Nine);
+        }
+
+        #[test]
+        fn it_returns_eight() {
+            assert_eq!(Card::new(Rank::Eight, Suit::Diamond).rank(), &Rank::Eight);
+        }
+
+        #[test]
+        fn it_returns_seven() {
+            assert_eq!(Card::new(Rank::Seven, Suit::Club).rank(), &Rank::Seven);
+        }
+
+        #[test]
+        fn it_returns_six() {
+            assert_eq!(Card::new(Rank::Six, Suit::Spade).rank(), &Rank::Six);
+        }
+
+        #[test]
+        fn it_returns_five() {
+            assert_eq!(Card::new(Rank::Five, Suit::Heart).rank(), &Rank::Five);
+        }
+
+        #[test]
+        fn it_returns_four() {
+            assert_eq!(Card::new(Rank::Four, Suit::Diamond).rank(), &Rank::Four);
+        }
+
+        #[test]
+        fn it_returns_trey() {
+            assert_eq!(Card::new(Rank::Trey, Suit::Club).rank(), &Rank::Trey);
+        }
+
+        #[test]
+        fn it_returns_deuce() {
+            assert_eq!(Card::new(Rank::Deuce, Suit::Spade).rank(), &Rank::Deuce);
+        }
+    }
+
+    mod suit {
+        use super::*;
+
+        #[test]
+        fn it_returns_spade() {
+            assert_eq!(Card::new(Rank::Ace, Suit::Spade).suit(), &Suit::Spade);
+        }
+
+        #[test]
+        fn it_returns_heart() {
+            assert_eq!(Card::new(Rank::King, Suit::Heart).suit(), &Suit::Heart);
+        }
+
+        #[test]
+        fn it_returns_diamond() {
+            assert_eq!(Card::new(Rank::Queen, Suit::Diamond).suit(), &Suit::Diamond);
+        }
+
+        #[test]
+        fn it_returns_club() {
+            assert_eq!(Card::new(Rank::Jack, Suit::Club).suit(), &Suit::Club);
+        }
+    }
+
+    mod display {
+        use super::*;
+
+        #[test]
+        fn it_formats_ace_spade() {
+            assert_eq!(
+                Card::new(Rank::Ace, Suit::Spade).to_string(),
+                "As".to_string()
+            );
+        }
+
+        #[test]
+        fn it_formats_king_heart() {
+            assert_eq!(
+                Card::new(Rank::King, Suit::Heart).to_string(),
+                "Kh".to_string()
+            );
+        }
+
+        #[test]
+        fn it_formats_queen_diamond() {
+            assert_eq!(
+                Card::new(Rank::Queen, Suit::Diamond).to_string(),
+                "Qd".to_string()
+            );
+        }
+
+        #[test]
+        fn it_formats_jack_club() {
+            assert_eq!(
+                Card::new(Rank::Jack, Suit::Club).to_string(),
+                "Jc".to_string()
+            );
+        }
+
+        #[test]
+        fn it_formats_ten_spade() {
+            assert_eq!(
+                Card::new(Rank::Ten, Suit::Spade).to_string(),
+                "Ts".to_string()
+            );
+        }
+
+        #[test]
+        fn it_formats_nine_heart() {
+            assert_eq!(
+                Card::new(Rank::Nine, Suit::Heart).to_string(),
+                "9h".to_string()
+            );
+        }
+
+        #[test]
+        fn it_formats_eight_diamond() {
+            assert_eq!(
+                Card::new(Rank::Eight, Suit::Diamond).to_string(),
+                "8d".to_string()
+            );
+        }
+
+        #[test]
+        fn it_formats_seven_club() {
+            assert_eq!(
+                Card::new(Rank::Seven, Suit::Club).to_string(),
+                "7c".to_string()
+            );
+        }
+
+        #[test]
+        fn it_formats_six_spade() {
+            assert_eq!(
+                Card::new(Rank::Six, Suit::Spade).to_string(),
+                "6s".to_string()
+            );
+        }
+
+        #[test]
+        fn it_formats_five_heart() {
+            assert_eq!(
+                Card::new(Rank::Five, Suit::Heart).to_string(),
+                "5h".to_string()
+            );
+        }
+
+        #[test]
+        fn it_formats_four_diamond() {
+            assert_eq!(
+                Card::new(Rank::Four, Suit::Diamond).to_string(),
+                "4d".to_string()
+            );
+        }
+
+        #[test]
+        fn it_formats_trey_club() {
+            assert_eq!(
+                Card::new(Rank::Trey, Suit::Club).to_string(),
+                "3c".to_string()
+            );
+        }
+
+        #[test]
+        fn it_formats_deuce_spade() {
+            assert_eq!(
+                Card::new(Rank::Deuce, Suit::Spade).to_string(),
+                "2s".to_string()
+            );
+        }
+    }
+
+    mod debug {
+        use super::*;
+
+        #[test]
+        fn it_debug_ormats_ace_spade() {
+            assert_eq!(
+                format!("{:?}", Card::new(Rank::Ace, Suit::Spade)),
+                "Card(As)".to_string()
+            );
+        }
+
+        #[test]
+        fn it_debug_ormats_king_heart() {
+            assert_eq!(
+                format!("{:?}", Card::new(Rank::King, Suit::Heart)),
+                "Card(Kh)".to_string()
+            );
+        }
+
+        #[test]
+        fn it_debug_ormats_queen_diamond() {
+            assert_eq!(
+                format!("{:?}", Card::new(Rank::Queen, Suit::Diamond)),
+                "Card(Qd)".to_string()
+            );
+        }
+
+        #[test]
+        fn it_debug_ormats_jack_club() {
+            assert_eq!(
+                format!("{:?}", Card::new(Rank::Jack, Suit::Club)),
+                "Card(Jc)".to_string()
+            );
+        }
+
+        #[test]
+        fn it_debug_ormats_ten_spade() {
+            assert_eq!(
+                format!("{:?}", Card::new(Rank::Ten, Suit::Spade)),
+                "Card(Ts)".to_string()
+            );
+        }
+
+        #[test]
+        fn it_debug_ormats_nine_heart() {
+            assert_eq!(
+                format!("{:?}", Card::new(Rank::Nine, Suit::Heart)),
+                "Card(9h)".to_string()
+            );
+        }
+
+        #[test]
+        fn it_debug_ormats_eight_diamond() {
+            assert_eq!(
+                format!("{:?}", Card::new(Rank::Eight, Suit::Diamond)),
+                "Card(8d)".to_string()
+            );
+        }
+
+        #[test]
+        fn it_debug_ormats_seven_club() {
+            assert_eq!(
+                format!("{:?}", Card::new(Rank::Seven, Suit::Club)),
+                "Card(7c)".to_string()
+            );
+        }
+
+        #[test]
+        fn it_debug_ormats_six_spade() {
+            assert_eq!(
+                format!("{:?}", Card::new(Rank::Six, Suit::Spade)),
+                "Card(6s)".to_string()
+            );
+        }
+
+        #[test]
+        fn it_debug_ormats_five_heart() {
+            assert_eq!(
+                format!("{:?}", Card::new(Rank::Five, Suit::Heart)),
+                "Card(5h)".to_string()
+            );
+        }
+
+        #[test]
+        fn it_debug_ormats_four_diamond() {
+            assert_eq!(
+                format!("{:?}", Card::new(Rank::Four, Suit::Diamond)),
+                "Card(4d)".to_string()
+            );
+        }
+
+        #[test]
+        fn it_debug_ormats_trey_club() {
+            assert_eq!(
+                format!("{:?}", Card::new(Rank::Trey, Suit::Club)),
+                "Card(3c)".to_string()
+            );
+        }
+
+        #[test]
+        fn it_debug_ormats_deuce_spade() {
+            assert_eq!(
+                format!("{:?}", Card::new(Rank::Deuce, Suit::Spade)),
+                "Card(2s)".to_string()
+            );
+        }
+    }
+
+    mod card_from_u64 {
+        use super::*;
+
+        #[test]
+        fn it_turns_into_u64() {
+            assert_eq!(
+                Card::from(0b0000000000000000000000000000000000000000000000000001),
+                Card::new(Rank::Ace, Suit::Spade)
+            );
+            assert_eq!(
+                Card::from(0b0000000000000000000000000000000000000000000000100000),
+                Card::new(Rank::King, Suit::Heart)
+            );
+            assert_eq!(
+                Card::from(0b0000000000000000000000000000000000000000010000000000),
+                Card::new(Rank::Queen, Suit::Diamond)
+            );
+            assert_eq!(
+                Card::from(0b0000000000000000000000000000000000001000000000000000),
+                Card::new(Rank::Jack, Suit::Club)
+            );
+            assert_eq!(
+                Card::from(0b0000000000000000000000000000000000010000000000000000),
+                Card::new(Rank::Ten, Suit::Spade)
+            );
+            assert_eq!(
+                Card::from(0b0000000000000000000000000000001000000000000000000000),
+                Card::new(Rank::Nine, Suit::Heart)
+            );
+            assert_eq!(
+                Card::from(0b0000000000000000000000000100000000000000000000000000),
+                Card::new(Rank::Eight, Suit::Diamond)
+            );
+            assert_eq!(
+                Card::from(0b0000000000000000000010000000000000000000000000000000),
+                Card::new(Rank::Seven, Suit::Club)
+            );
+            assert_eq!(
+                Card::from(0b0000000000000000000100000000000000000000000000000000),
+                Card::new(Rank::Six, Suit::Spade)
+            );
+            assert_eq!(
+                Card::from(0b0000000000000010000000000000000000000000000000000000),
+                Card::new(Rank::Five, Suit::Heart)
+            );
+            assert_eq!(
+                Card::from(0b0000000001000000000000000000000000000000000000000000),
+                Card::new(Rank::Four, Suit::Diamond)
+            );
+            assert_eq!(
+                Card::from(0b0000100000000000000000000000000000000000000000000000),
+                Card::new(Rank::Trey, Suit::Club)
+            );
+            assert_eq!(
+                Card::from(0b0001000000000000000000000000000000000000000000000000),
+                Card::new(Rank::Deuce, Suit::Spade)
+            );
+        }
+    }
+
+    mod card_from_str {
+        use super::*;
+
+        #[test]
+        fn it_turns_into_card() {
+            assert_eq!(
+                Card::from_str("As").unwrap(),
+                Card::new(Rank::Ace, Suit::Spade)
+            );
+            assert_eq!(
+                Card::from_str("Kh").unwrap(),
+                Card::new(Rank::King, Suit::Heart)
+            );
+            assert_eq!(
+                Card::from_str("Qd").unwrap(),
+                Card::new(Rank::Queen, Suit::Diamond)
+            );
+            assert_eq!(
+                Card::from_str("Jc").unwrap(),
+                Card::new(Rank::Jack, Suit::Club)
+            );
+            assert_eq!(
+                Card::from_str("Ts").unwrap(),
+                Card::new(Rank::Ten, Suit::Spade)
+            );
+            assert_eq!(
+                Card::from_str("9h").unwrap(),
+                Card::new(Rank::Nine, Suit::Heart)
+            );
+            assert_eq!(
+                Card::from_str("8d").unwrap(),
+                Card::new(Rank::Eight, Suit::Diamond)
+            );
+            assert_eq!(
+                Card::from_str("7c").unwrap(),
+                Card::new(Rank::Seven, Suit::Club)
+            );
+            assert_eq!(
+                Card::from_str("6s").unwrap(),
+                Card::new(Rank::Six, Suit::Spade)
+            );
+            assert_eq!(
+                Card::from_str("5h").unwrap(),
+                Card::new(Rank::Five, Suit::Heart)
+            );
+            assert_eq!(
+                Card::from_str("4d").unwrap(),
+                Card::new(Rank::Four, Suit::Diamond)
+            );
+            assert_eq!(
+                Card::from_str("3c").unwrap(),
+                Card::new(Rank::Trey, Suit::Club)
+            );
+            assert_eq!(
+                Card::from_str("2s").unwrap(),
+                Card::new(Rank::Deuce, Suit::Spade)
+            );
+        }
+    }
+
+    mod u64_from_card {
+        use super::*;
+
+        #[test]
+        fn it_turns_into_u64() {
+            assert_eq!(
+                u64::from(Card::new(Rank::Ace, Suit::Spade)),
+                0b0000000000000000000000000000000000000000000000000001
+            );
+            assert_eq!(
+                u64::from(Card::new(Rank::King, Suit::Heart)),
+                0b0000000000000000000000000000000000000000000000100000
+            );
+            assert_eq!(
+                u64::from(Card::new(Rank::Queen, Suit::Diamond)),
+                0b0000000000000000000000000000000000000000010000000000
+            );
+            assert_eq!(
+                u64::from(Card::new(Rank::Jack, Suit::Club)),
+                0b0000000000000000000000000000000000001000000000000000
+            );
+            assert_eq!(
+                u64::from(Card::new(Rank::Ten, Suit::Spade)),
+                0b0000000000000000000000000000000000010000000000000000
+            );
+            assert_eq!(
+                u64::from(Card::new(Rank::Nine, Suit::Heart)),
+                0b0000000000000000000000000000001000000000000000000000
+            );
+            assert_eq!(
+                u64::from(Card::new(Rank::Eight, Suit::Diamond)),
+                0b0000000000000000000000000100000000000000000000000000
+            );
+            assert_eq!(
+                u64::from(Card::new(Rank::Seven, Suit::Club)),
+                0b0000000000000000000010000000000000000000000000000000
+            );
+            assert_eq!(
+                u64::from(Card::new(Rank::Six, Suit::Spade)),
+                0b0000000000000000000100000000000000000000000000000000
+            );
+            assert_eq!(
+                u64::from(Card::new(Rank::Five, Suit::Heart)),
+                0b0000000000000010000000000000000000000000000000000000
+            );
+            assert_eq!(
+                u64::from(Card::new(Rank::Four, Suit::Diamond)),
+                0b0000000001000000000000000000000000000000000000000000
+            );
+            assert_eq!(
+                u64::from(Card::new(Rank::Trey, Suit::Club)),
+                0b0000100000000000000000000000000000000000000000000000
+            );
+            assert_eq!(
+                u64::from(Card::new(Rank::Deuce, Suit::Spade)),
+                0b0001000000000000000000000000000000000000000000000000
+            );
+        }
     }
 }
