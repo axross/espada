@@ -22,11 +22,10 @@ impl Showdown {
                 return None;
             }
 
-            let cards = [
+            let made_hand: MadeHand = [
                 player[0], player[1], board[0], board[1], board[2], board[3], board[4],
-            ];
-
-            let made_hand: MadeHand = cards.into_iter().collect();
+            ]
+            .into();
             let power_index = made_hand.power_index();
 
             let showdown_player = ShowdownPlayer {
