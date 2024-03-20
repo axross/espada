@@ -1,6 +1,6 @@
 [package]
 name = "espada"
-version = "0.1.0"
+version = "0.2.0"
 description = "Texas Hold'em poker odds evaluator"
 categories = ["games", "mathematics", "simulation"]
 keywords = ["poker", "texas-holdem"]
