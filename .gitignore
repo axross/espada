@@ -1,4 +1,6 @@
-debug/
-target/
+debug/*
+target/*
+
+node_modules/*
 
 .vscode/settings.json

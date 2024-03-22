@@ -1,0 +1,24 @@
+{
+  "branches": [
+    "main",
+    "ci-publish"
+  ],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/github",
+    [
+      "semantic-release-cargo",
+      {
+        "allFeatures": true,
+        "check": true,
+        "checkArgs": [
+          "--no-deps"
+        ],
+        "publishArgs": [
+          "--no-verify"
+        ]
+      }
+    ]
+  ]
+}
