@@ -46,7 +46,7 @@ jobs:
           node-version: "20"
       - name: Release
         run: |
-          npm install --no-save semantic-release semantic-release-cargo
+          npm install --no-save semantic-release @semantic-release/git semantic-release-cargo
           npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
