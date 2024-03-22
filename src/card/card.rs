@@ -1,8 +1,6 @@
 use super::{Rank, Suit};
-use core::fmt::Display;
-use core::fmt::Formatter;
-use core::str::FromStr;
-use std::fmt::Debug;
+use std::fmt::{Debug, Display, Formatter};
+use std::str::FromStr;
 
 #[derive(PartialEq, Eq, Hash, PartialOrd, Ord, Clone, Copy)]
 pub struct Card(Rank, Suit);
@@ -22,13 +20,13 @@ impl Card {
 }
 
 impl Display for Card {
-    fn fmt(&self, f: &mut Formatter) -> core::fmt::Result {
+    fn fmt(&self, f: &mut Formatter) -> std::fmt::Result {
         write!(f, "{}{}", self.rank(), self.suit())
     }
 }
 
 impl Debug for Card {
-    fn fmt(&self, f: &mut Formatter) -> core::fmt::Result {
+    fn fmt(&self, f: &mut Formatter) -> std::fmt::Result {
         write!(f, "Card({}{})", self.rank(), self.suit())
     }
 }
@@ -124,7 +122,7 @@ impl FromStr for Card {
 pub struct ParseCardError(String);
 
 impl Display for ParseCardError {
-    fn fmt(&self, f: &mut Formatter) -> core::fmt::Result {
+    fn fmt(&self, f: &mut Formatter) -> std::fmt::Result {
         write!(f, "{} is not a valid string for a card.", self.0)
     }
 }

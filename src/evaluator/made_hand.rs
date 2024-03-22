@@ -24,7 +24,7 @@ impl MadeHand {
 }
 
 impl PartialOrd for MadeHand {
-    fn partial_cmp(&self, other: &Self) -> Option<core::cmp::Ordering> {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
         self.power_index().partial_cmp(&other.power_index())
     }
 }

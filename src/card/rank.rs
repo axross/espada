@@ -1,5 +1,5 @@
-use core::fmt::{Display, Formatter};
-use core::str::FromStr;
+use std::fmt::{Display, Formatter};
+use std::str::FromStr;
 
 #[derive(Debug, PartialEq, Eq, Hash, PartialOrd, Ord, Clone, Copy)]
 pub enum Rank {
@@ -57,7 +57,7 @@ impl Rank {
 }
 
 impl Display for Rank {
-    fn fmt(&self, f: &mut Formatter) -> core::fmt::Result {
+    fn fmt(&self, f: &mut Formatter) -> std::fmt::Result {
         let c: char = self.into();
 
         c.to_string().fmt(f)
