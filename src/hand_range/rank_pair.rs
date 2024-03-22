@@ -1,7 +1,6 @@
-use std::fmt::Display;
-
 use crate::card::{Card, Rank, Suit};
 use crate::hand_range::CardPair;
+use std::fmt::Display;
 
 #[derive(Debug, PartialEq, Eq, Hash, Clone, Copy)]
 pub enum RankPair {

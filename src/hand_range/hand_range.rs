@@ -1,10 +1,10 @@
 use super::{CardPair, RankPair};
 use crate::card::{Card, Rank, RankRange, Suit, SuitRange};
 use crate::hand_range::{HandRangeToken, HandRangeTokenKind};
-use core::fmt::Display;
-use core::str::FromStr;
 use fxhash::FxBuildHasher;
 use std::collections::{hash_map, HashMap};
+use std::fmt::Display;
+use std::str::FromStr;
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct HandRange(HashMap<CardPair, f32, FxBuildHasher>);
@@ -102,7 +102,7 @@ impl<'a> IntoIterator for &'a HandRange {
 }
 
 impl Display for HandRange {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         let rank_pairs = self.rank_pairs();
         let orphan_card_pairs = self.orphan_card_pairs();
         let mut tokens = vec![];
@@ -1098,7 +1098,7 @@ mod tests {
         #[test]
         fn it_formats_empty_hand_range() {
             assert_eq!(
-                HandRange::from_iter(core::iter::empty::<CardPair>()).to_string(),
+                HandRange::from_iter(std::iter::empty::<CardPair>()).to_string(),
                 ""
             );
         }
@@ -1113,7 +1113,7 @@ mod tests {
                 HandRange::from_str("88-66,JJ+,44,AQs-A9s,98o-96o,K8s+,ATo+,44,JTs,72o,AsKs,7d6h")
                     .unwrap(),
                 HandRange::from_iter(
-                    core::iter::empty()
+                    std::iter::empty()
                         .chain(
                             RankRange::inclusive(Rank::Eight, Rank::Six)
                                 .into_iter()
@@ -1165,7 +1165,7 @@ mod tests {
                 HandRange::from_str("88-66:0.66,JJ+:0.5,44,AQs-A9s:0.2,98o-96o:0.999,K8s+:0.80,ATo+:1,44:0.44,JTs:0.25,72o:0.27,AsKs:0.4,7d6h:0.67")
                     .unwrap(),
                 HandRange::from_iter(
-                    core::iter::empty()
+                    std::iter::empty()
                         .chain(
                             RankRange::inclusive(Rank::Eight, Rank::Six)
                                 .into_iter()

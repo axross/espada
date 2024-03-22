@@ -25,7 +25,7 @@ impl HandRangeToken {
 }
 
 impl Display for HandRangeToken {
-    fn fmt(&self, f: &mut Formatter) -> core::fmt::Result {
+    fn fmt(&self, f: &mut Formatter) -> std::fmt::Result {
         let res = match self.kind {
             HandRangeTokenKind::BottomClosedRankPairRange(rank_pair) => {
                 write!(f, "{}+", rank_pair)
@@ -122,7 +122,7 @@ impl IntoIterator for HandRangeToken {
                 .collect::<Vec<(CardPair, f32)>>()
                 .into_iter(),
             HandRangeTokenKind::SingleCardPair(card_pair) => {
-                core::iter::once((card_pair, self.probability))
+                std::iter::once((card_pair, self.probability))
                     .collect::<Vec<(CardPair, f32)>>()
                     .into_iter()
             }
