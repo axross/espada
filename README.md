@@ -13,7 +13,7 @@ Add this to Cargo.toml:
 
 ```toml
 [dependencies]
-espada = "0.1"
+espada = "0.3.1"
 ```
 
 In your `main.rs` or `lib.rs`, you can use this as:
