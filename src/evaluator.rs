@@ -1,3 +1,4 @@
+mod dp_table;
 mod flop_exhaustive;
 mod made_hand;
 mod showdown;
