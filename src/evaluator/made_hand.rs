@@ -7134,17 +7134,17 @@ fn hash_for_rainbow<'c>(cards: &[Card; 7]) -> u16 {
     let mut remaining_card_len: u8 = 0;
 
     for card in cards.iter() {
-        let card_i = u8::from(card.rank()) as usize;
+        let rank_index = u8::from(card.rank()) as usize;
 
-        card_len_each_rank[card_i] += 1;
+        card_len_each_rank[rank_index] += 1;
         remaining_card_len += 1;
     }
 
     let mut hash: u16 = 0;
 
     for rank in RANKS {
-        let rank_i = u8::from(rank) as usize;
-        let len: u8 = card_len_each_rank[rank_i];
+        let rank_index = u8::from(rank) as usize;
+        let len: u8 = card_len_each_rank[rank_index];
 
         if len == 0 {
             continue;
